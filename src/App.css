@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,42 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination__link {
+  color: #ffffff;
+  background-color: #007bff;
+  padding: 2px 5px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.pagination__link:hover {
+  background-color: #afafaf;
+  color: #fff;
+  border-color: #afafaf;
+}
+
+.pagination__link--disabled {
+  color: #ccc;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination__link--active {
+  color: #fff;
+  background-color: #007bff;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 4px;
 }
