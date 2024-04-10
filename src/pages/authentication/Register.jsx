@@ -83,9 +83,9 @@ const Register = () => {
 
   return (
     <>
-      <div class="min-h-screen bg-purple-100 flex flex-col justify-center sm:px-6 lg:px-8">
+      <div class="min-h-screen bg-white flex flex-col justify-center sm:px-6 lg:px-8">
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-2">
-          <div class="bg-white py-8 px-4 shadow rounded-xl sm:px-10">
+          <div class="bg-white py-8 px-4 border border-1 shadow rounded-xl sm:px-10">
             <div class="sm:mx-auto mb-2 sm:w-full sm:max-w-md">
               <img class="mx-auto h-16 w-auto" src={Logo} alt="Workflow" />
             </div>

@@ -1,76 +1,19 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #ffffff;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.activePage a {
+  background-color: #6366f1;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.activePage a:hover {
+  background-color: #6366f1;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.pagination {
+.pagination-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  list-style: none;
-  padding: 0;
-}
-
-.pagination__link {
-  color: #ffffff;
-  background-color: #007bff;
-  padding: 2px 5px;
-  margin: 0 5px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.pagination__link:hover {
-  background-color: #afafaf;
-  color: #fff;
-  border-color: #afafaf;
-}
-
-.pagination__link--disabled {
-  color: #ccc;
-  border-color: #ccc;
-  cursor: not-allowed;
-}
-
-.pagination__link--active {
-  color: #fff;
-  background-color: #007bff;
-  padding-right: 5px;
-  padding-left: 5px;
-  border-radius: 4px;
+  padding: 2px 0;
+  background: #ffffff; /* or any other color */
 }

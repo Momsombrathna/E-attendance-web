@@ -22,7 +22,7 @@ const AdminCard = ({
         <main className="flex gap-2 justify-center">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mt-3">
             <a href="/manage-users">
-              <div className="bg-white md:w-64 w-80 hover:bg-purple-100 hover:border hover:border-purple-300  h-24 rounded-lg shadow-md flex items-center justify-center">
+              <div className="bg-white border border-1 md:w-64 w-80 hover:bg-purple-100 hover:border hover:border-purple-300  h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-pink-100 rounded-full p-2">
                     <IoPeopleOutline className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-eee-700" />
@@ -39,8 +39,8 @@ const AdminCard = ({
               </div>
             </a>
 
-            <a href="manage-users">
-              <div className="bg-white md:w-64 w-80 hover:bg-purple-100 hover:border hover:border-purple-300  h-24 rounded-lg shadow-md flex items-center justify-center">
+            <a href="/manage-users">
+              <div className="bg-white border border-1 md:w-64 w-80 hover:bg-purple-100 hover:border hover:border-purple-300  h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-yellow-100 rounded-full p-2">
                     <PiStudent className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-eee-700" />
@@ -58,7 +58,7 @@ const AdminCard = ({
             </a>
 
             <a href="manage-users">
-              <div className="bg-white md:w-64 w-80 hover:bg-purple-100 hover:border hover:border-purple-300 h-24 rounded-lg shadow-md flex items-center justify-center">
+              <div className="bg-white border border-1 md:w-64 w-80 hover:bg-purple-100 hover:border hover:border-purple-300 h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-green-100 rounded-full p-2">
                     <PiChalkboardTeacher className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-eee-700" />
@@ -75,8 +75,8 @@ const AdminCard = ({
               </div>
             </a>
 
-            <a href="manage-users">
-              <div className="bg-white md:w-64 w-80 hover:bg-purple-100 hover:border hover:border-purple-300 h-24 rounded-lg shadow-md flex items-center justify-center">
+            <a href="/manage-classes">
+              <div className="bg-white border border-1 md:w-64 w-80 hover:bg-purple-100 hover:border hover:border-purple-300 h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-blue-100 rounded-full p-2">
                     <PiGraduationCap className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-eee-700" />
@@ -95,7 +95,7 @@ const AdminCard = ({
           </div>
         </main>
         <div className="flex md:flex-row flex-col gap-3">
-          <div className="bg-white flex-col relative mt-5 md:w-64 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
+          <div className="bg-white border border-1 flex-col relative mt-5 md:w-64 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
             <div className=" absolute bg-purple-100 top-2 text-sm  px-2 rounded-xl text-eee-500 left-2">
               <p className="text-xl fnt-medium text-eee-700">
                 User's card count
@@ -109,7 +109,7 @@ const AdminCard = ({
             </p>
           </div>
 
-          <div className="bg-white relative mt-5 md:w-96 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
+          <div className="bg-white relative border border-1 mt-5 md:w-96 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
             <div className=" mt-1 absolute top-1 text-sm bg-yellow-100 px-2 rounded-xl text-eee-500 left-2">
               <p>Pie charts for user</p>
             </div>
@@ -121,7 +121,7 @@ const AdminCard = ({
               />
             </div>
           </div>
-          <div className="bg-white relative mt-5 md:w-96 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
+          <div className="bg-white border border-1 relative mt-5 md:w-96 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
             <div className=" mt-1 absolute top-1 text-sm bg-cyan-100 px-2 rounded-xl text-eee-500 left-2">
               <p>Pie charts for user verified and not verified</p>
             </div>

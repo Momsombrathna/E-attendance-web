@@ -14,6 +14,8 @@ import VerifyEmail from "./pages/authentication/VerifyEmail";
 import Profile from "./pages/users/Profile";
 import Home from "./pages/Home";
 import ManageUsers from "./pages/admin/ManageUsers";
+import ManageClasses from "./pages/admin/ManageClasses";
+import ClassDetail from "./pages/admin/ClassDetail";
 import { isAdmin, isUser, isLogged, isNotLogged } from "./auth/AuthContext";
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
                 )
               }
             />
+
+            {/* Admin Router */}
             <Route
               path="/dashboard"
               element={
@@ -66,6 +70,28 @@ function App() {
                 )
               }
             />
+            <Route
+              path="/manage-classes"
+              element={
+                isLogged() && isAdmin() ? (
+                  <ManageClasses />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/class-detail/:classId"
+              element={
+                isLogged() && isAdmin() ? (
+                  <ClassDetail />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+
+            {/* User Router */}
             <Route
               path="/profile"
               element={

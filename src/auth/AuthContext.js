@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
 import { api_url, decodedToken, decodedUserID } from "../api/config";
+import Swal from "sweetalert2";
 
 const login = async (data) => {
-  const { username, password, setIsLoading, setErrors, navigate, Swal } = data;
+  const { username, password, setIsLoading, setErrors } = data;
   let response;
   const loginData = {
     username,
@@ -59,10 +60,35 @@ const login = async (data) => {
 
 // logout
 const logout = () => {
-  Cookies.remove("token");
-  Cookies.remove("userId");
-  Cookies.remove("role");
-  window.location.href = "/login";
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You are about to logout",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, logout",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch(`${api_url}/auth/logout/${decodedUserID}`, {
+        method: "POST",
+        headers: {
+          "auth-token": decodedToken,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          Cookies.remove("token");
+          Cookies.remove("userId");
+          Cookies.remove("role");
+          window.location.href = "/login";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
 };
 
 const hasRole = (targetRole) => {

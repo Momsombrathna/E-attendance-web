@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import AdminCard from "../../components/AdminCard";
 import { api_url, decodedToken } from "../../api/config";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Dashboard = () => {
   const [user, setUser] = useState([]);
   const [classes, setClasses] = useState([]);
+  const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -43,11 +45,30 @@ const Dashboard = () => {
       });
   }, []);
 
+  useEffect(() => {
+    fetch(`${api_url}/admin/all-cards`, {
+      method: "GET",
+      headers: {
+        "auth-token": decodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setLoading(false);
+        setCards(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, []);
+
   // console.log("user: ", user);
   // console.log("classes: ", classes);
 
   const userCount = user.length;
   const classesCount = classes.length;
+  const cardsCount = cards.length;
 
   const classOwner = classes.map((cls) => cls.owner);
 
@@ -65,18 +86,26 @@ const Dashboard = () => {
   const unverifiedUser = user.filter((usr) => usr.verified === false);
   const unverifiedUserCount = unverifiedUser.length;
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ScaleLoader color="#c4c4c4" loading={loading} height={35} width={4} />
+      </div>
+    );
+  }
+
   return (
     <>
-      <main className=" bg-purple-100 overflow-y-auto h-screen mb-10">
-        <h1 className="text-2xl text-eee-700 font-medium p-5">DASHBOARD</h1>
+      <main className=" bg-white overflow-y-auto h-screen mb-10">
+        <h1 className="text-2xl text-eee-700 font-medium p-3">DASHBOARD</h1>
         <hr />
-        <section className="flex w-auto justify-center items-center">
+        <section className="flex mt-5 w-auto justify-center items-center">
           <AdminCard
             total_students={studentCount}
             total_teachers={uniqueClassOwnerCount}
             total_classes={classesCount}
             total_users={userCount}
-            total_users_card={200}
+            total_users_card={cardsCount}
             total_verified={verifiedUserCount}
             total_unverified={unverifiedUserCount}
           />

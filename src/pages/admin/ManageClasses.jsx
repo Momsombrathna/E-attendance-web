@@ -1,44 +1,62 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { api_url, decodedToken, decodedUserID } from "../../api/config";
 import ReactPaginate from "react-paginate";
 import { GrFormNext } from "react-icons/gr";
 import { GrFormPrevious } from "react-icons/gr";
-import Swal from "sweetalert2";
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { IoPeopleOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { PiGraduationCap } from "react-icons/pi";
+import CryptoJs from "crypto-js";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
-const ManageUsers = () => {
-  const [user, setUser] = useState([]);
+const ManageClasses = () => {
+  const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
 
   useEffect(() => {
-    fetch(`${api_url}/admin/all-users`, {
-      method: "GET",
-      headers: {
-        "auth-token": decodedToken,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUser(data);
+    const fetchClasses = async () => {
+      try {
+        const res = await axios.get(`${api_url}/admin/all-classes`, {
+          method: "GET",
+          headers: {
+            "auth-token": decodedToken,
+          },
+        });
+        setClasses(res.data);
         setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchClasses();
   }, []);
 
-  const currentUsers = user.slice(
+  const currentClasses = classes.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
 
-  const handleDelete = (userId) => {
+  function formatDate(dateString) {
+    if (!dateString) {
+      return "Invalid date";
+    }
+
+    const date = new Date(dateString);
+
+    if (isNaN(date)) {
+      return "Invalid date";
+    }
+
+    return format(date, "MMMM dd, yyyy");
+  }
+
+  const handleDeleteClass = (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -47,34 +65,27 @@ const ManageUsers = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        fetch(`${api_url}/admin/delete-user/${userId}`, {
-          method: "DELETE",
-          headers: {
-            "auth-token": decodedToken,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            Swal.fire("Deleted!", data.message, "success");
-            setUser(user.filter((user) => user._id !== userId));
-          })
-          .catch((err) => {
-            console.log(err);
-            Swal.fire("Error!", "An error occurred", "error");
+        try {
+          await axios.delete(`${api_url}/admin/delete-class/${id}`, {
+            method: "DELETE",
+            headers: {
+              "auth-token": decodedToken,
+            },
           });
+          Swal.fire("Deleted!", "Class has been deleted.", "success");
+          setClasses(classes.filter((cls) => cls._id !== id));
+        } catch (err) {
+          console.error(err);
+        }
       }
     });
   };
 
-  function formatDate(date) {
-    return format(new Date(date), "dd/MM/yyyy");
-  }
-
   return (
     <>
-      <main className=" bg-white px-3 mb-20 ">
+      <main className=" bg-white px-3  mb-20">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="py-2">
             <div className="my-2">
@@ -87,16 +98,17 @@ const ManageUsers = () => {
                     </Link>
                   </li>
                   <li className="text-lg">
-                    <IoPeopleOutline className="w-6 h-6 pr-2" />
-                    Users
+                    <PiGraduationCap className="w-6 h-6 pr-2" />
+                    classes
                   </li>
                 </ul>
               </div>
-              <div className="bg-white rounded-lg border border-1 shadow-md p-2 md:p-4">
+              <div className="bg-white border border-1 rounded-lg shadow-md p-2 md:p-4">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-medium text-eee-700">
-                    Users Management
+                  <h3 className="text-xl font-medium text-eee-700 ">
+                    Classes Management
                   </h3>
+
                   <form class="flex items-center max-w-sm mx-auto">
                     <label for="simple-search" class="sr-only">
                       Search
@@ -149,15 +161,13 @@ const ManageUsers = () => {
                       <span class="sr-only">Search</span>
                     </button>
                   </form>
+
                   <ReactPaginate
-                    itemsPerPage={itemsPerPage}
-                    totalItems={user.length}
-                    currentPage={currentPage}
                     previousLabel={<GrFormPrevious />}
                     nextLabel={<GrFormNext />}
                     breakLabel={".."}
                     breakClassName={"break-me"}
-                    pageCount={Math.ceil(user.length / itemsPerPage)}
+                    pageCount={Math.ceil(classes.length / itemsPerPage)}
                     marginPagesDisplayed={1}
                     pageRangeDisplayed={3}
                     onPageChange={({ selected }) => setCurrentPage(selected)}
@@ -166,14 +176,14 @@ const ManageUsers = () => {
                     }
                     pageClassName={"mx-1"}
                     pageLinkClassName={
-                      "px-2 py-1 rounded bg-white text-black hover:bg-eee-300 hover:text-white transition-colors duration-200"
+                      "px-2 py-1 rounded bg-white text-black hover:bg-blue-500 hover:text-white transition-colors duration-200"
                     }
                     activeLinkClassName={"bg-blue-500 text-white"}
                     previousLinkClassName={
-                      "px-1  flex justify-center py-1 rounded text-black hover:bg-eee-300 hover:text-white transition-colors duration-200"
+                      "px-2  flex justify-center py-1 rounded text-black hover:bg-blue-500 hover:text-white transition-colors duration-200"
                     }
                     nextLinkClassName={
-                      "px-1 py-1  flex justify-center rounded  text-black hover:bg-eee-300 hover:text-white transition-colors duration-200"
+                      "px-2 py-1  flex justify-center rounded  text-black hover:bg-blue-500 hover:text-white transition-colors duration-200"
                     }
                     disabledClassName={"opacity-50 cursor-not-allowed"}
                     activeClassName={"activePage"}
@@ -184,12 +194,11 @@ const ManageUsers = () => {
                   <table className="w-full table-auto">
                     <thead>
                       <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th className="py-3 px-3 text-left">User Profile</th>
-                        <th className="py-3 px-3 text-left">User Name</th>
-                        <th className="py-3 px-3 text-left">Email</th>
-                        <th className="py-3 px-3 text-center">Role</th>
-                        <th className="py-3 px-3 text-center">Status</th>
-                        <th className="py-3 px-3 text-center">Created at</th>
+                        <th className="py-3 px-3 text-left">Class Profile</th>
+                        <th className="py-3 px-3 text-left">Class Name</th>
+                        {/* <th className="py-3 px-3 text-left">Owner</th> */}
+                        <th className="py-3 px-3 text-center">Members</th>
+                        <th className="py-3 px-3 text-center">Create at</th>
                         <th className="py-3 px-3 text-center">Actions</th>
                       </tr>
                     </thead>
@@ -197,17 +206,24 @@ const ManageUsers = () => {
                       {loading ? (
                         <tr>
                           <td colSpan="5" className="text-center py-4">
-                            Loading...
+                            <div className="container mx-auto px-4 sm:px-8">
+                              <div className="flex justify-center items-center h-96">
+                                <ScaleLoader
+                                  color="#c4c4c4"
+                                  loading={loading}
+                                />
+                              </div>
+                            </div>
                           </td>
                         </tr>
-                      ) : user.length === 0 ? (
+                      ) : classes.length === 0 ? (
                         <tr>
                           <td colSpan="5" className="text-center py-4">
                             No users found
                           </td>
                         </tr>
                       ) : (
-                        currentUsers.map((user, index) => (
+                        currentClasses.map((data, index) => (
                           <tr
                             key={index}
                             className="border-b border-gray-200 hover:bg-gray-100"
@@ -217,50 +233,52 @@ const ManageUsers = () => {
                                 <img
                                   alt="user"
                                   className="h-14 w-14 rounded-full"
-                                  src={user.profile}
+                                  src={data.classProfile}
                                 />
                               </div>
                             </td>
                             <td className="py-1 px-3 text-left whitespace-nowrap">
                               <div className="flex items-center">
                                 <span className="font-medium">
-                                  {user.username}
+                                  {data.className}
                                 </span>
                               </div>
                             </td>
-                            <td className="py-1 px-3 text-left">
+                            {/* <td className="py-1 px-3 text-left">
                               <div className="flex items-center font-medium">
-                                <span>{user.email}</span>
+                                <span>{data.owner}</span>
                               </div>
-                            </td>
+                            </td> */}
                             <td className="py-1 px-3 text-center">
                               <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs font-medium">
-                                {user.role}
+                                {data.students.length}
                               </span>
                             </td>
                             <td className="py-1 px-3 text-center">
-                              {user.verified === true ? (
-                                <span className="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs font-medium">
-                                  Verified
-                                </span>
-                              ) : (
-                                <span className="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs font-medium">
-                                  Not Verified
-                                </span>
-                              )}
-                            </td>
-                            <td className="py-1 px-3 text-center">
-                              <span className=" py-1 px-3 rounded-full text-xs font-medium">
-                                {formatDate(user.created)}
+                              <span className="text-xs font-medium">
+                                {formatDate(data.created)}
                               </span>
                             </td>
                             <td className="py-1 px-3 text-center">
                               <button
-                                onClick={() => handleDelete(user._id)}
-                                className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                                onClick={() => handleDeleteClass(data._id)}
+                                className="bg-red-500 text-white py-1 px-3 rounded-md text-xs font-medium"
                               >
                                 Delete
                               </button>
+                              &nbsp;
+                              <Link
+                                to={`/class-detail/${encodeURIComponent(
+                                  CryptoJs.AES.encrypt(
+                                    JSON.stringify(data._id),
+                                    "secret-key-123"
+                                  ).toString()
+                                )}`}
+                              >
+                                <button className="bg-blue-500 text-white py-1 px-3 rounded-md text-xs font-medium">
+                                  View
+                                </button>
+                              </Link>
                             </td>
                           </tr>
                         ))
@@ -270,7 +288,6 @@ const ManageUsers = () => {
                   </table>
                 </div>
               </div>
-              <div></div>
             </div>
           </div>
         </div>
@@ -279,4 +296,4 @@ const ManageUsers = () => {
   );
 };
 
-export default ManageUsers;
+export default ManageClasses;
