@@ -17,3 +17,9 @@
   padding: 2px 0;
   background: #ffffff; /* or any other color */
 }
+
+@media (max-width: 767px) {
+  .desktop-only {
+    display: none;
+  }
+}

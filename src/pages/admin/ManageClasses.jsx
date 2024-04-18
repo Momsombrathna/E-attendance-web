@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { PiGraduationCap } from "react-icons/pi";
 import CryptoJs from "crypto-js";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { HiDotsHorizontal } from "react-icons/hi";
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -104,8 +105,8 @@ const ManageClasses = () => {
                 </ul>
               </div>
               <div className="bg-white border border-1 rounded-lg shadow-md p-2 md:p-4">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-medium text-eee-700 ">
+                <div className="flex md:flex-row flex-col items-center">
+                  <h3 className="text-xl md:mb-0 mb-4 font-medium text-eee-700 ">
                     Classes Management
                   </h3>
 
@@ -197,8 +198,12 @@ const ManageClasses = () => {
                         <th className="py-3 px-3 text-left">Class Profile</th>
                         <th className="py-3 px-3 text-left">Class Name</th>
                         {/* <th className="py-3 px-3 text-left">Owner</th> */}
-                        <th className="py-3 px-3 text-center">Members</th>
-                        <th className="py-3 px-3 text-center">Create at</th>
+                        <th className="py-3 px-3 text-center desktop-only">
+                          Members
+                        </th>
+                        <th className="py-3 px-3 text-center desktop-only">
+                          Create at
+                        </th>
                         <th className="py-3 px-3 text-center">Actions</th>
                       </tr>
                     </thead>
@@ -249,36 +254,61 @@ const ManageClasses = () => {
                                 <span>{data.owner}</span>
                               </div>
                             </td> */}
-                            <td className="py-1 px-3 text-center">
+                            <td className="py-1 px-3 text-center desktop-only">
                               <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs font-medium">
                                 {data.students.length}
                               </span>
                             </td>
-                            <td className="py-1 px-3 text-center">
+
+                            <td className="py-1 px-3 text-center desktop-only">
                               <span className="text-xs font-medium">
                                 {formatDate(data.created)}
                               </span>
                             </td>
+
                             <td className="py-1 px-3 text-center">
-                              <button
-                                onClick={() => handleDeleteClass(data._id)}
-                                className="bg-red-500 text-white py-1 px-3 rounded-md text-xs font-medium"
-                              >
-                                Delete
-                              </button>
-                              &nbsp;
-                              <Link
-                                to={`/class-detail/${encodeURIComponent(
-                                  CryptoJs.AES.encrypt(
-                                    JSON.stringify(data._id),
-                                    "secret-key-123"
-                                  ).toString()
-                                )}`}
-                              >
-                                <button className="bg-blue-500 text-white py-1 px-3 rounded-md text-xs font-medium">
-                                  View
-                                </button>
-                              </Link>
+                              <div className="dropdown dropdown-end">
+                                <div
+                                  tabIndex={0}
+                                  role="button"
+                                  className=" bg-eee-100 rounded-full p-2"
+                                >
+                                  <HiDotsHorizontal size={"1rem"} />
+                                </div>
+
+                                <ul
+                                  tabIndex={0}
+                                  className="dropdown-content flex justify-center mt-2
+                                   items-center z-[1] shadow border border-1 backdrop-blur-sm bg-white/30  rounded-box w-24 h-20"
+                                >
+                                  <div className="flex flex-col w-20 gap-2">
+                                    <div>
+                                      <button
+                                        onClick={() =>
+                                          handleDeleteClass(data._id)
+                                        }
+                                        className="bg-red-500 w-20 text-white py-1 px-3 rounded-md text-xs font-medium"
+                                      >
+                                        Delete
+                                      </button>
+                                    </div>
+                                    <div>
+                                      <Link
+                                        to={`/class-detail/${encodeURIComponent(
+                                          CryptoJs.AES.encrypt(
+                                            JSON.stringify(data._id),
+                                            "secret-key-123"
+                                          ).toString()
+                                        )}`}
+                                      >
+                                        <button className="bg-blue-500 w-20 text-white py-1 px-3 rounded-md text-xs font-medium">
+                                          View
+                                        </button>
+                                      </Link>
+                                    </div>
+                                  </div>
+                                </ul>
+                              </div>
                             </td>
                           </tr>
                         ))

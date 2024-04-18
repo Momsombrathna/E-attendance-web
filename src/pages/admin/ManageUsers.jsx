@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoPeopleOutline } from "react-icons/io5";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const ManageUsers = () => {
   const [user, setUser] = useState([]);
@@ -196,8 +197,15 @@ const ManageUsers = () => {
                     <tbody className="text-gray-600 text-sm font-light">
                       {loading ? (
                         <tr>
-                          <td colSpan="5" className="text-center py-4">
-                            Loading...
+                          <td colspan="7" className="text-center py-4">
+                            <div className="container mx-auto px-4 sm:px-8">
+                              <div className="flex justify-center items-center h-96">
+                                <ScaleLoader
+                                  color="#c4c4c4"
+                                  loading={loading}
+                                />
+                              </div>
+                            </div>
                           </td>
                         </tr>
                       ) : user.length === 0 ? (

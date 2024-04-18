@@ -66,7 +66,7 @@ const Dashboard = () => {
   // console.log("user: ", user);
   // console.log("classes: ", classes);
 
-  const userCount = user.length;
+  const userCounts = user.length;
   const classesCount = classes.length;
   const cardsCount = cards.length;
 
@@ -78,13 +78,19 @@ const Dashboard = () => {
   );
   const uniqueClassOwnerCount = uniqueClassOwner.length;
 
-  const studentCount = userCount - uniqueClassOwnerCount;
+  const studentCount = userCounts - uniqueClassOwnerCount;
 
   const verifiedUser = user.filter((usr) => usr.verified === true);
   const verifiedUserCount = verifiedUser.length;
 
   const unverifiedUser = user.filter((usr) => usr.verified === false);
   const unverifiedUserCount = unverifiedUser.length;
+
+  // admin count
+  const adminCount = user.filter((usr) => usr.role === "admin").length;
+
+  // user count
+  const userCount = user.filter((usr) => usr.role === "user").length;
 
   if (loading) {
     return (
@@ -104,10 +110,12 @@ const Dashboard = () => {
             total_students={studentCount}
             total_teachers={uniqueClassOwnerCount}
             total_classes={classesCount}
-            total_users={userCount}
+            total_all_users={userCounts}
             total_users_card={cardsCount}
             total_verified={verifiedUserCount}
             total_unverified={unverifiedUserCount}
+            total_admin={adminCount}
+            total_users={userCount}
           />
         </section>
       </main>
