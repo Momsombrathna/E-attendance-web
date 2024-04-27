@@ -33,38 +33,30 @@ function App() {
           /> */}
           <Route
             path="/login"
-            element={isNotLogged() ? <Login /> : <Navigate to="/dashboard" />}
+            element={isNotLogged() ? <Login /> : <Navigate to="/" />}
           />
           <Route
             path="/verify-email"
-            element={
-              isNotLogged() ? <VerifyEmail /> : <Navigate to="/dashboard" />
-            }
+            element={isNotLogged() ? <VerifyEmail /> : <Navigate to="/" />}
           />
           <Route
             path="/reset-password"
-            element={
-              isNotLogged() ? <ResetPass /> : <Navigate to="/dashboard" />
-            }
+            element={isNotLogged() ? <ResetPass /> : <Navigate to="/" />}
           />
           <Route
             path="/verify-reset-pass"
-            element={
-              isNotLogged() ? <VerifyResetPass /> : <Navigate to="/dashboard" />
-            }
+            element={isNotLogged() ? <VerifyResetPass /> : <Navigate to="/" />}
           />
 
           <Route
             path="/set-new-password"
-            element={
-              isNotLogged() ? <SetNewPass /> : <Navigate to="/dashboard" />
-            }
+            element={isNotLogged() ? <SetNewPass /> : <Navigate to="/" />}
           />
 
           {/* Middle ware */}
           <Route element={<AsideBar />}>
             <Route
-              path="/"
+              path="/Home"
               element={
                 isLogged() && (isAdmin() || isUser()) ? (
                   <Home />
@@ -76,7 +68,7 @@ function App() {
 
             {/* Admin Router */}
             <Route
-              path="/dashboard"
+              path="/"
               element={
                 isLogged() && isAdmin() ? (
                   <Dashboard />

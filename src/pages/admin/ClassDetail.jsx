@@ -117,7 +117,7 @@ const ClassDetail = () => {
               <div className=" breadcrumbs">
                 <ul>
                   <li className="text-lg">
-                    <Link to="/dashboard" className="text-blue-500">
+                    <Link to="/" className="text-blue-500">
                       <LuLayoutDashboard className="w-6 h-6 pr-2" />
                       Dashboard
                     </Link>
