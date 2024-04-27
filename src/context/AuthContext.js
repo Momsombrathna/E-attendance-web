@@ -36,6 +36,9 @@ const login = async (data) => {
       Cookies.set("token", tokens, { expires: 30 });
       Cookies.set("userId", userId, { expires: 30 });
       Cookies.set("role", result.user.role, { expires: 30 });
+      Cookies.set("username", result.user.username, { expires: 30 });
+      Cookies.set("email", result.user.email, { expires: 30 });
+      Cookies.set("profile", result.user.profile, { expires: 30 });
 
       window.location.href = "/dashboard";
     }

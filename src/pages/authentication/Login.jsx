@@ -5,7 +5,7 @@ import MoonLoader from "react-spinners/MoonLoader";
 import Logo from "../../assets/e-attendance.png";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
-import { login } from "../../auth/AuthContext";
+import { login } from "../../context/AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -131,12 +131,21 @@ const Login = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
-              <label
-                for="default-checkbox"
-                class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300"
-              >
-                Show Password
-              </label>
+              <div className="flex w-full justify-between">
+                <label
+                  for="default-checkbox"
+                  class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Show Password
+                </label>
+
+                <a
+                  href="/reset-password"
+                  class="text-xs font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+                >
+                  Forgot Password?
+                </a>
+              </div>
             </div>
 
             <div class="mt-4">

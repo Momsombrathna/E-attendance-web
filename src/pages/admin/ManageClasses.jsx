@@ -3,7 +3,7 @@ import { api_url, decodedToken, decodedUserID } from "../../api/config";
 import ReactPaginate from "react-paginate";
 import { GrFormNext } from "react-icons/gr";
 import { GrFormPrevious } from "react-icons/gr";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -17,26 +17,52 @@ const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
+  const [query, setQuery] = useState("");
   const itemsPerPage = 10;
 
   useEffect(() => {
-    const fetchClasses = async () => {
-      try {
-        const res = await axios.get(`${api_url}/admin/all-classes`, {
-          method: "GET",
-          headers: {
-            "auth-token": decodedToken,
-          },
-        });
-        setClasses(res.data);
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     fetchClasses();
   }, []);
+
+  const fetchClasses = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${api_url}/admin/all-classes`, {
+        method: "GET",
+        headers: {
+          "auth-token": decodedToken,
+        },
+      });
+      setClasses(res.data);
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (query.trim() === "") {
+      fetchClasses();
+      return;
+    }
+    setLoading(true);
+    fetch(`${api_url}/admin/search-class/${query}`, {
+      method: "GET",
+      headers: {
+        "auth-token": decodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setClasses(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  };
 
   const currentClasses = classes.slice(
     currentPage * itemsPerPage,
@@ -110,7 +136,10 @@ const ManageClasses = () => {
                     Classes Management
                   </h3>
 
-                  <form class="flex items-center max-w-sm mx-auto">
+                  <form
+                    onSubmit={handleSearch}
+                    class="flex items-center max-w-sm mx-auto"
+                  >
                     <label for="simple-search" class="sr-only">
                       Search
                     </label>
@@ -135,6 +164,8 @@ const ManageClasses = () => {
                       <input
                         type="text"
                         id="simple-search"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Search..."
                         required
@@ -197,9 +228,9 @@ const ManageClasses = () => {
                       <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th className="py-3 px-3 text-left">Class Profile</th>
                         <th className="py-3 px-3 text-left">Class Name</th>
-                        {/* <th className="py-3 px-3 text-left">Owner</th> */}
+                        <th className="py-3 px-3 text-left">Owner</th>
                         <th className="py-3 px-3 text-center desktop-only">
-                          Members
+                          Peoples
                         </th>
                         <th className="py-3 px-3 text-center desktop-only">
                           Create at
@@ -212,7 +243,12 @@ const ManageClasses = () => {
                         <tr>
                           <td colSpan="5" className="text-center py-4">
                             <div className="container mx-auto px-4 sm:px-8">
-                              <div className="flex justify-center items-center h-96">
+                              <div
+                                style={{
+                                  height: "615px",
+                                }}
+                                className="flex justify-center items-center"
+                              >
                                 <ScaleLoader
                                   color="#c4c4c4"
                                   loading={loading}
@@ -249,11 +285,11 @@ const ManageClasses = () => {
                                 </span>
                               </div>
                             </td>
-                            {/* <td className="py-1 px-3 text-left">
+                            <td className="py-1 px-3 text-left">
                               <div className="flex items-center font-medium">
-                                <span>{data.owner}</span>
+                                <span>{data.ownerName}</span>
                               </div>
-                            </td> */}
+                            </td>
                             <td className="py-1 px-3 text-center desktop-only">
                               <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs font-medium">
                                 {data.students.length}

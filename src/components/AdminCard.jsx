@@ -9,6 +9,7 @@ import UserActivityChart from "../partials/UserActivityChart";
 import { RiAdminLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa6";
 import UsersChart from "../partials/UsersChart";
+import ClassAndTeacherCharts from "../partials/ClassAndTeacherChart";
 
 const AdminCard = ({
   total_all_users,
@@ -173,15 +174,28 @@ const AdminCard = ({
             </div>
           </div>
         </div>
-        <div className="bg-white border border-1 relative mt-5 md:w-96 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
-          <div className=" mt-1 absolute top-1 text-sm bg-cyan-100 px-2 rounded-xl text-eee-500 left-2">
-            <p>Pie charts for user verified and not verified</p>
+        <div className="flex md:flex-row flex-col gap-3">
+          <div className="bg-white border border-1 relative mt-5 md:w-96 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
+            <div className=" mt-1 absolute top-1 text-sm bg-cyan-100 px-2 rounded-xl text-eee-500 left-2">
+              <p>Pie charts for user verified and not verified</p>
+            </div>
+            <div className="flex mt-5 px-2 flex-row w-full items-center justify-center">
+              <UserActivityChart
+                userActive={total_verified}
+                userNonactive={total_unverified}
+              />
+            </div>
           </div>
-          <div className="flex mt-5 px-2 flex-row w-full items-center justify-center">
-            <UserActivityChart
-              userActive={total_verified}
-              userNonactive={total_unverified}
-            />
+          <div className="bg-white border border-1 relative mt-5 md:w-96 w-80 h-60 px-5 md:px-0 rounded-lg shadow-md flex items-center justify-center">
+            <div className=" mt-1 absolute top-1 text-sm bg-indigo-100 px-2 rounded-xl text-eee-500 left-2">
+              <p>Teacher and Classes charts</p>
+            </div>
+            <div className="flex mt-5 px-2 flex-row w-full items-center justify-center">
+              <ClassAndTeacherCharts
+                total_teachers={total_teachers}
+                total_class={total_classes}
+              />
+            </div>
           </div>
         </div>
       </section>

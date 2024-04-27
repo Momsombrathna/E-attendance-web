@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { IoChevronBackSharp } from "react-icons/io5";
 import { IoChevronForward } from "react-icons/io5";
@@ -9,11 +9,41 @@ import { IoHomeOutline } from "react-icons/io5";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { IoMailOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { isAdmin, isUser, logout } from "../auth/AuthContext";
+import { isAdmin, isUser, logout } from "../context/AuthContext";
 import Logo from "../assets/e-attendance.png";
+import Cookies from "js-cookie";
 
 const AsideBar = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [username, setUsername] = useState("");
+  const [userProfile, setUserProfile] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    const name = Cookies.get("username");
+    const profile = Cookies.get("profile");
+    const email = Cookies.get("email");
+
+    setUsername(name);
+    setUserProfile(profile);
+    setUserEmail(email);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // handle close drawer and open drawer
   const handleDrawer = () => {
@@ -58,6 +88,26 @@ const AsideBar = () => {
               </a>
               <div class="py-4 overflow-y-auto">
                 <ul class="space-y-1 font-medium">
+                  <h3 class="ms-3 font-medium mb-4 text-eee-500">PROFILE</h3>
+                  <li>
+                    <div class="flex flex-row mb-3 gap-2 px-2">
+                      <img
+                        class="w-9 h-9 p-1 rounded-full ring-2 ring-green-300 dark:ring-gray-500"
+                        src={userProfile}
+                        alt="user-profile"
+                      />
+
+                      <div class="flex flex-col">
+                        <span class="font-bold text-sm text-eee-700">
+                          {username}
+                        </span>
+                        <span class="text-xs text-eee-700 whitespace-nowrap max-w-[100px]">
+                          {userEmail}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                  <hr />
                   {isAdmin() && (
                     <>
                       <h3 class="ms-3 font-medium mb-4 text-eee-500">ADMIN</h3>
@@ -77,7 +127,7 @@ const AsideBar = () => {
                     </>
                   )}
 
-                  {(isUser() || isAdmin()) && (
+                  {isUser() && (
                     <>
                       <h3 class="ms-3 font-medium mb-4 text-eee-500">USER</h3>
                       <li>
@@ -118,34 +168,34 @@ const AsideBar = () => {
                       </li>
 
                       <hr />
-                      <h3 class="ms-3 font-medium mb-4  mt-2 text-eee-500">
-                        PERSONAL
-                      </h3>
-                      <li>
-                        <Link
-                          to="/notification"
-                          class="flex items-center p-2 text-slate-800 hover:bg-eee-100 group"
-                        >
-                          <IoNotificationsOutline class="w-5 h-5 text-eee-700" />
-                          <span class="ms-3 text-sm font-medium text-eee-700">
-                            Notifications
-                          </span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/classes"
-                          class="flex items-center p-2 text-slate-800 hover:bg-eee-100 group"
-                        >
-                          <IoMailOutline class="w-5 h-5 text-eee-700" />
-                          <span class="ms-3 text-sm font-medium text-eee-700">
-                            Messages
-                          </span>
-                        </Link>
-                      </li>
-                      <hr />
                     </>
                   )}
+                  <h3 class="ms-3 font-medium mb-4  mt-2 text-eee-500">
+                    PERSONAL
+                  </h3>
+                  <li>
+                    <Link
+                      to="/notification"
+                      class="flex items-center p-2 text-slate-800 hover:bg-eee-100 group"
+                    >
+                      <IoNotificationsOutline class="w-5 h-5 text-eee-700" />
+                      <span class="ms-3 text-sm font-medium text-eee-700">
+                        Notifications
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/classes"
+                      class="flex items-center p-2 text-slate-800 hover:bg-eee-100 group"
+                    >
+                      <IoMailOutline class="w-5 h-5 text-eee-700" />
+                      <span class="ms-3 text-sm font-medium text-eee-700">
+                        Messages
+                      </span>
+                    </Link>
+                  </li>
+                  <hr />
                   <li>
                     <div
                       onClick={handleLogout}
@@ -348,7 +398,7 @@ const AsideBar = () => {
                           clip-rule="evenodd"
                         />
                       </svg>
-                      <span class="sr-only">Dribbble account</span>
+                      <span class="sr-only">Dribble account</span>
                     </a>
                   </div>
                 </div>

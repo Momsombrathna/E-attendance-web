@@ -96,7 +96,12 @@ const ClassDetail = () => {
   if (loading) {
     return (
       <div className="container mx-auto px-4 sm:px-8">
-        <div className="flex justify-center items-center h-96">
+        <div
+          style={{
+            height: "615px",
+          }}
+          className="flex justify-center items-center"
+        >
           <ScaleLoader color="#c4c4c4" loading={loading} size={15} />
         </div>
       </div>
@@ -129,7 +134,7 @@ const ClassDetail = () => {
                   </li>
                 </ul>
               </div>
-              <div className="w-full border border-1 drop-shadow-md rounded-lg">
+              <div className="w-full drop-shadow-md rounded-lg">
                 <div className="px-5 p-2">
                   <h2>Class</h2>
                   <div className="flex flex-row gap-2">
@@ -148,7 +153,7 @@ const ClassDetail = () => {
                         </span>
                       </h2>
                       <h2 className="text-md text-eee-700 fon-medium">
-                        Members :{" "}
+                        Peoples :{" "}
                         <span className="text-blue-500">
                           {numberOfStudents}
                         </span>
@@ -173,11 +178,11 @@ const ClassDetail = () => {
                   <h2>Owner</h2>
                   <UserDetail userID={ownerID} />
                 </div>
-                <hr />
-                <div className="px-5 p-2 flex flex-col gap-2">
-                  <h2>Attendances</h2>
-                  <GetTimeLine classId={decryptedClassId} />
-                </div>
+              </div>
+              <hr />
+              <div className="px-5 p-2 flex flex-col gap-2">
+                <h2>Attendances</h2>
+                <GetTimeLine classId={decryptedClassId} />
               </div>
             </div>
           </div>

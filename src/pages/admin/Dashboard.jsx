@@ -63,9 +63,6 @@ const Dashboard = () => {
       });
   }, []);
 
-  // console.log("user: ", user);
-  // console.log("classes: ", classes);
-
   const userCounts = user.length;
   const classesCount = classes.length;
   const cardsCount = cards.length;
@@ -102,7 +99,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <main className=" bg-white overflow-y-auto h-screen mb-10">
+      <main className=" bg-white mb-10">
         <h1 className="text-2xl text-eee-700 font-medium p-3">DASHBOARD</h1>
         <hr />
         <section className="flex mt-5 w-auto justify-center items-center">

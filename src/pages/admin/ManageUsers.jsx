@@ -9,14 +9,22 @@ import { Link } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoPeopleOutline } from "react-icons/io5";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { FaCaretDown } from "react-icons/fa";
+import axios from "axios";
 
 const ManageUsers = () => {
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
+  const [query, setQuery] = useState("");
   const itemsPerPage = 10;
 
   useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = () => {
+    setLoading(true);
     fetch(`${api_url}/admin/all-users`, {
       method: "GET",
       headers: {
@@ -32,7 +40,31 @@ const ManageUsers = () => {
         console.log(err);
         setLoading(false);
       });
-  }, []);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (query.trim() === "") {
+      fetchUsers();
+      return;
+    }
+    setLoading(true);
+    fetch(`${api_url}/admin/search-user/${query}`, {
+      method: "GET",
+      headers: {
+        "auth-token": decodedToken,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
 
   const currentUsers = user.slice(
     currentPage * itemsPerPage,
@@ -69,6 +101,40 @@ const ManageUsers = () => {
     });
   };
 
+  const handleSetRole = (userId, newRole) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to change user role",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, change role",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios
+            .put(
+              `${api_url}/admin/update-role/${userId}`,
+              { role: newRole, userId: userId },
+              {
+                headers: {
+                  "auth-token": decodedToken,
+                },
+              }
+            )
+            .then((response) => {
+              Swal.fire("Role Changed!", response.data.message, "success");
+              fetchUsers();
+            });
+        } catch (err) {
+          console.log(err);
+          Swal.fire("Error!", "An error occurred", "error");
+        }
+      }
+    });
+  };
+
   function formatDate(date) {
     return format(new Date(date), "dd/MM/yyyy");
   }
@@ -98,7 +164,10 @@ const ManageUsers = () => {
                   <h3 className="text-2xl font-medium text-eee-700">
                     Users Management
                   </h3>
-                  <form class="flex items-center max-w-sm mx-auto">
+                  <form
+                    onSubmit={handleSearch}
+                    class="flex items-center max-w-sm mx-auto"
+                  >
                     <label for="simple-search" class="sr-only">
                       Search
                     </label>
@@ -123,6 +192,8 @@ const ManageUsers = () => {
                       <input
                         type="text"
                         id="simple-search"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Search..."
                         required
@@ -199,7 +270,12 @@ const ManageUsers = () => {
                         <tr>
                           <td colspan="7" className="text-center py-4">
                             <div className="container mx-auto px-4 sm:px-8">
-                              <div className="flex justify-center items-center h-96">
+                              <div
+                                style={{
+                                  height: "615px",
+                                }}
+                                className="flex justify-center items-center"
+                              >
                                 <ScaleLoader
                                   color="#c4c4c4"
                                   loading={loading}
@@ -242,9 +318,57 @@ const ManageUsers = () => {
                               </div>
                             </td>
                             <td className="py-1 px-3 text-center">
-                              <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs font-medium">
-                                {user.role}
-                              </span>
+                              <div className="flex justify-center items-center gap-1">
+                                {user.role === "admin" ? (
+                                  <span className="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs font-medium">
+                                    Admin
+                                  </span>
+                                ) : (
+                                  <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs font-medium">
+                                    User
+                                  </span>
+                                )}
+                                <div className="dropdown dropdown-bottom dropdown-end">
+                                  <div
+                                    tabIndex={0}
+                                    role="button"
+                                    className=" p-1 bg-gray-200 rounded-full hover:bg-gray-300"
+                                  >
+                                    <FaCaretDown />
+                                  </div>
+                                  <ul
+                                    tabIndex={0}
+                                    className="dropdown-content z-[1] menu  mt-2 bg-white shadow rounded-box w-28"
+                                  >
+                                    <li className="menu-title">
+                                      <span className="text-eee-700">
+                                        Set Role
+                                      </span>
+                                    </li>
+                                    <hr />
+                                    <li>
+                                      <button
+                                        onClick={() =>
+                                          handleSetRole(user._id, "admin")
+                                        }
+                                        className="menu-item font-medium text-eee-700"
+                                      >
+                                        Admin
+                                      </button>
+                                    </li>
+                                    <li>
+                                      <button
+                                        onClick={() =>
+                                          handleSetRole(user._id, "user")
+                                        }
+                                        className="menu-item font-medium text-eee-700"
+                                      >
+                                        User
+                                      </button>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                             </td>
                             <td className="py-1 px-3 text-center">
                               {user.verified === true ? (

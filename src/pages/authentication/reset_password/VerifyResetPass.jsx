@@ -1,11 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { api_url } from "../../api/config";
+import { api_url } from "../../../api/config";
 import MoonLoader from "react-spinners/MoonLoader";
-import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
-import Logo from "../../assets/e-attendance.png";
-import { login } from "../../context/AuthContext";
+import Logo from "../../../assets/e-attendance.png";
 
 const OTPInput = ({ length = 6, errorMessage, inputOTP }) => {
   const [otp, setOTP] = useState(new Array(length).fill(""));
@@ -56,14 +54,13 @@ const OTPInput = ({ length = 6, errorMessage, inputOTP }) => {
   );
 };
 
-const VerifyEmail = () => {
+const VerifyResetPass = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [otp, setOTP] = useState("");
   const email = location.state.email;
-  const password = location.state.password;
   const [errorMessage, setErrorMessage] = useState("");
 
   const validateOTP = () => {
@@ -89,7 +86,7 @@ const VerifyEmail = () => {
       return;
     }
 
-    const response = await fetch(`${api_url}/auth/verify-otp`, {
+    const response = await fetch(`${api_url}/auth/verify-pass-reset-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -101,12 +98,8 @@ const VerifyEmail = () => {
     });
 
     if (response.ok) {
-      login({
-        username: email,
-        password: password,
-        setIsLoading,
-        navigate,
-      });
+      setIsLoading(false);
+      navigate("/set-new-password", { state: { email } });
     } else {
       setIsLoading(false);
       setErrorMessage("Invalid OTP");
@@ -115,7 +108,7 @@ const VerifyEmail = () => {
 
   const handleSendMail = async () => {
     setIsLoading(true);
-    const response = await fetch(`${api_url}/auth/email-otp`, {
+    const response = await fetch(`${api_url}/auth/pass-reset-req-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -165,7 +158,7 @@ const VerifyEmail = () => {
                 />
               </div>
 
-              <div class="flex flex-col space-y-5 mt-10">
+              <div class="flex flex-col space-y-2 mt-8">
                 <div>
                   <button class="flex flex-row items-center justify-center text-center w-full border rounded-lg outline-none py-2 bg-blue-700 border-none text-white text-sm shadow-sm">
                     {isLoading ? (
@@ -197,4 +190,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default VerifyResetPass;

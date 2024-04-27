@@ -7,7 +7,10 @@ import {
 } from "react-router-dom";
 import Dashboard from "./pages/admin/Dashboard";
 import Login from "./pages/authentication/Login";
-import Register from "./pages/authentication/Register";
+// import Register from "./pages/authentication/Register";
+import ResetPass from "./pages/authentication/reset_password/ResetPass";
+import VerifyResetPass from "./pages/authentication/reset_password/VerifyResetPass";
+import SetNewPass from "./pages/authentication/reset_password/SetNewPass";
 import AsideBar from "./components/AsideBar";
 import ErrorPage from "./pages/ErrorPage";
 import VerifyEmail from "./pages/authentication/VerifyEmail";
@@ -16,7 +19,7 @@ import Home from "./pages/Home";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageClasses from "./pages/admin/ManageClasses";
 import ClassDetail from "./pages/admin/ClassDetail";
-import { isAdmin, isUser, isLogged, isNotLogged } from "./auth/AuthContext";
+import { isAdmin, isUser, isLogged, isNotLogged } from "./context/AuthContext";
 
 function App() {
   return (
@@ -24,19 +27,41 @@ function App() {
       <Router>
         <Routes>
           <Route path="*" element={<ErrorPage />} />
-          <Route
+          {/* <Route
             path="/register"
             element={isNotLogged() ? <Register /> : <Navigate to="/" />}
-          />
+          /> */}
           <Route
             path="/login"
-            element={isNotLogged() ? <Login /> : <Navigate to="/" />}
+            element={isNotLogged() ? <Login /> : <Navigate to="/dashboard" />}
           />
           <Route
             path="/verify-email"
-            element={isNotLogged() ? <VerifyEmail /> : <Navigate to="/" />}
+            element={
+              isNotLogged() ? <VerifyEmail /> : <Navigate to="/dashboard" />
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              isNotLogged() ? <ResetPass /> : <Navigate to="/dashboard" />
+            }
+          />
+          <Route
+            path="/verify-reset-pass"
+            element={
+              isNotLogged() ? <VerifyResetPass /> : <Navigate to="/dashboard" />
+            }
           />
 
+          <Route
+            path="/set-new-password"
+            element={
+              isNotLogged() ? <SetNewPass /> : <Navigate to="/dashboard" />
+            }
+          />
+
+          {/* Middle ware */}
           <Route element={<AsideBar />}>
             <Route
               path="/"
