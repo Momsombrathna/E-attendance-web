@@ -113,7 +113,7 @@ const AsideBar = () => {
                       <h3 class="ms-3 font-medium mb-4 text-eee-500">ADMIN</h3>
                       <li>
                         <Link
-                          to="/dashboard"
+                          to="/"
                           class={`flex items-center p-2 text-slate-800 hover:bg-eee-100 group
                         `}
                         >
