@@ -40,7 +40,7 @@ const login = async (data) => {
       Cookies.set("email", result.user.email, { expires: 30 });
       Cookies.set("profile", result.user.profile, { expires: 30 });
 
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     }
   } catch (error) {
     console.log(error);
