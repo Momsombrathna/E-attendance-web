@@ -102,7 +102,7 @@ const AsideBar = () => {
                           {username}
                         </span>
                         <span class="text-xs text-eee-700 whitespace-nowrap max-w-[100px]">
-                          {userEmail}
+                          {/* {userEmail} */}
                         </span>
                       </div>
                     </div>
