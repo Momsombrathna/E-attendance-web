@@ -8,6 +8,8 @@ import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoPeopleOutline } from "react-icons/io5";
+import { IoCloseSharp } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { FaCaretDown } from "react-icons/fa";
 import axios from "axios";
@@ -260,7 +262,7 @@ const ManageUsers = () => {
                         <th className="py-3 px-3 text-left">User Name</th>
                         <th className="py-3 px-3 text-left">Email</th>
                         <th className="py-3 px-3 text-center">Role</th>
-                        <th className="py-3 px-3 text-center">Status</th>
+                        <th className="py-3 px-3 text-center">Verified</th>
                         <th className="py-3 px-3 text-center">Created at</th>
                         <th className="py-3 px-3 text-center">Actions</th>
                       </tr>
@@ -296,7 +298,7 @@ const ManageUsers = () => {
                             key={index}
                             className="border-b border-gray-200 hover:bg-gray-100"
                           >
-                            <td className="py-1 px-3 text-left whitespace-nowrap">
+                            <td className="py-1 px-3 max-w-15 text-left whitespace-nowrap">
                               <div className="flex items-center">
                                 <img
                                   alt="user"
@@ -305,19 +307,19 @@ const ManageUsers = () => {
                                 />
                               </div>
                             </td>
-                            <td className="py-1 px-3 text-left whitespace-nowrap">
+                            <td className="py-1 px-3 max-w-5 text-left whitespace-nowrap">
                               <div className="flex items-center">
                                 <span className="font-medium">
                                   {user.username}
                                 </span>
                               </div>
                             </td>
-                            <td className="py-1 px-3 text-left">
+                            <td className="py-1 px-3 max-w-18  text-left">
                               <div className="flex items-center font-medium">
                                 <span>{user.email}</span>
                               </div>
                             </td>
-                            <td className="py-1 px-3 text-center">
+                            <td className="py-1 max-w-10  px-3 text-center">
                               <div className="flex justify-center items-center gap-1">
                                 {user.role === "admin" ? (
                                   <span className="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs font-medium">
@@ -370,23 +372,30 @@ const ManageUsers = () => {
                                 </div>
                               </div>
                             </td>
-                            <td className="py-1 px-3 text-center">
-                              {user.verified === true ? (
-                                <span className="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs font-medium">
-                                  Verified
+                            <td className="py-1 max-w-10  px-3 ">
+                              {user.verified ? (
+                                <span className="flex text-white justify-center items-center content-center">
+                                  <div className="bg-green-500 p-1 rounded-full">
+                                    <FaCheck
+                                      size={"1rem"}
+                                      className="w-4 h-4"
+                                    />
+                                  </div>
                                 </span>
                               ) : (
-                                <span className="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs font-medium">
-                                  Not Verified
+                                <span className="flex text-white justify-center items-center content-center">
+                                  <div className="bg-red-500 p-1 rounded-full">
+                                    <IoCloseSharp className="w-4 h-4" />
+                                  </div>
                                 </span>
                               )}
                             </td>
-                            <td className="py-1 px-3 text-center">
+                            <td className="py-1 max-w-10  px-3 text-center">
                               <span className=" py-1 px-3 rounded-full text-xs font-medium">
                                 {formatDate(user.created)}
                               </span>
                             </td>
-                            <td className="py-1 px-3 text-center">
+                            <td className="py-1 max-w-10  px-3 text-center">
                               <button
                                 onClick={() => handleDelete(user._id)}
                                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
