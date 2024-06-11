@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AdminCard from "../../components/AdminCard";
+import ChartCard from "../../components/ChartCard";
 import { api_url, decodedToken } from "../../api/config";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { BsGraphUp } from "react-icons/bs";
+import { GrOverview } from "react-icons/gr";
 
 const Dashboard = () => {
   const [user, setUser] = useState([]);
@@ -99,10 +102,17 @@ const Dashboard = () => {
 
   return (
     <>
-      <main className=" bg-white mb-10">
-        <h1 className="text-2xl text-eee-700 font-medium p-3">DASHBOARD</h1>
-        <hr />
-        <section className="flex mt-5 w-auto justify-center items-center">
+      <main className=" bg-gradient-to-r from-gray-900 to-gray-800 mb-10">
+        <h1 className="text-2xl text-gray-500 font-medium p-3 pl-7 md:pl-16">
+          <br />
+          DASHBOARD
+        </h1>
+
+        <section className="flex mt-5 w-auto flex-col justify-center items-center">
+          <div className="px-5 flex justify-center mb-5 items-center gap-2 flex-row rounded-lg backdrop-blur-md bg-white/10">
+            <GrOverview className="text-2xl text-gray-300 font-medium" />
+            <p className="text-2xl text-gray-300 font-medium">Overviews</p>
+          </div>
           <AdminCard
             total_students={studentCount}
             total_teachers={uniqueClassOwnerCount}
@@ -115,6 +125,24 @@ const Dashboard = () => {
             total_users={userCount}
           />
         </section>
+
+        <section className="flex mt-20 w-auto flex-col justify-center items-center">
+          <div className="px-5 flex justify-center items-center mb-5 gap-2 flex-row rounded-lg backdrop-blur-md bg-white/10">
+            <BsGraphUp className="text-2xl text-gray-300 font-medium" />
+            <p className="text-2xl text-gray-300 font-medium">Statistic</p>
+          </div>
+          <ChartCard
+            total_students={studentCount}
+            total_teachers={uniqueClassOwnerCount}
+            total_classes={classesCount}
+            total_users_card={cardsCount}
+            total_verified={verifiedUserCount}
+            total_unverified={unverifiedUserCount}
+            total_users={userCount}
+            total_admin={adminCount}
+          />
+        </section>
+        <br />
       </main>
     </>
   );

@@ -110,7 +110,7 @@ const ClassDetail = () => {
 
   return (
     <>
-      <main className=" bg-white px-3  mb-20">
+      <main className=" px-3  mb-20">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="py-2">
             <div className="my-2">
@@ -146,25 +146,25 @@ const ClassDetail = () => {
                       />
                     </div>
                     <div className="flex flex-col justify-center ">
-                      <h2 className="text-md text-eee-700 fon-medium">
+                      <h2 className="text-md text-eee-400 fon-medium">
                         Class Name :{" "}
                         <span className="text-blue-500">
                           {classDetail.className}
                         </span>
                       </h2>
-                      <h2 className="text-md text-eee-700 fon-medium">
+                      <h2 className="text-md text-eee-400 fon-medium">
                         Peoples :{" "}
                         <span className="text-blue-500">
                           {numberOfStudents}
                         </span>
                       </h2>
-                      <h2 className="text-md text-eee-700 fon-medium">
+                      <h2 className="text-md text-eee-400 fon-medium">
                         Total attendances :{" "}
                         <span className="text-blue-500">
                           {numberOfAttendance}
                         </span>
                       </h2>
-                      <h2 className="text-md text-eee-700 fon-medium">
+                      <h2 className="text-md text-eee-400 fon-medium">
                         Created at :{" "}
                         <span className="text-blue-500">
                           {formatDate(classDetail.created)}
@@ -173,13 +173,13 @@ const ClassDetail = () => {
                     </div>
                   </div>
                 </div>
-                <hr />
+
                 <div className="px-5 p-2 flex flex-col gap-2">
                   <h2>Owner</h2>
                   <UserDetail userID={ownerID} />
                 </div>
               </div>
-              <hr />
+
               <div className="px-5 p-2 flex flex-col gap-2">
                 <h2>Attendances</h2>
                 <GetTimeLine classId={decryptedClassId} />

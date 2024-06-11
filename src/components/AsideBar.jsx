@@ -10,6 +10,11 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { IoMailOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { isAdmin, isUser, logout } from "../context/AuthContext";
+import { FaUsers } from "react-icons/fa6";
+import { PiStudent } from "react-icons/pi";
+import { RiAdminLine } from "react-icons/ri";
+import { PiGraduationCapLight } from "react-icons/pi";
+
 import Logo from "../assets/e-attendance.png";
 import Cookies from "js-cookie";
 
@@ -57,14 +62,14 @@ const AsideBar = () => {
   return (
     <>
       <div className="flex flex-row ">
-        <div>
+        <div className=" max-h-lvh">
           <div
-            className={`fixed top-0 left-0 w-44 h-full bg-white drop-shadow-2xl dark:bg-gray-800 transform transition-all duration-200 ${
+            className={`fixed z-40 top-0 left-0 w-44 h-full bg-gray-900 drop-shadow-2xl dark:bg-gray-800 transform transition-all duration-200 ${
               isOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
             <button
-              className="p-2 mt-20 flex float-right absolute text-white bg-white drop-shadow-md rounded-full hover:bg-eee-100 top-2 right-0 transform translate-x-1/2 -translate-y-1/2"
+              className="p-2 mt-20 flex float-right absolute text-white bg-gray-800 drop-shadow-md rounded-full hover:bg-gray-900 top-2 right-0 transform translate-x-1/2 -translate-y-1/2"
               onClick={handleDrawer}
             >
               {isOpen ? (
@@ -98,7 +103,7 @@ const AsideBar = () => {
                       />
 
                       <div class="flex flex-col">
-                        <span class="font-bold text-sm text-eee-700">
+                        <span class="font-bold text-sm text-gray-500">
                           {username}
                         </span>
                         <span class="text-xs text-eee-700 whitespace-nowrap max-w-[100px]">
@@ -107,23 +112,66 @@ const AsideBar = () => {
                       </div>
                     </div>
                   </li>
-                  <hr />
+
                   {isAdmin() && (
                     <>
                       <h3 class="ms-3 font-medium mb-4 text-eee-500">ADMIN</h3>
                       <li>
                         <Link
                           to="/"
-                          class={`flex items-center p-2 text-slate-800 hover:bg-eee-100 group
+                          class={`flex items-center p-2 pl-6 hover:bg-gray-700 group
                         `}
                         >
-                          <LuLayoutDashboard class="w-5 h-5 text-eee-700" />
-                          <span class="ms-3 text-sm font-medium text-eee-700">
+                          <LuLayoutDashboard class="w-5 h-5 text-gray-400" />
+                          <span class="ms-3 text-sm font-medium text-gray-400">
                             Dashboard
                           </span>
                         </Link>
                       </li>
-                      <hr />
+                      <li>
+                        <Link
+                          to="/manage-users"
+                          class="flex items-center p-2 pl-6 text-slate-800 hover:bg-gray-700 group"
+                        >
+                          <FaUsers class="w-5 h-5 text-gray-400" />
+                          <span class="ms-3 text-sm font-medium text-gray-400">
+                            Users
+                          </span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/manage-users"
+                          class="flex items-center p-2 pl-6 text-slate-800 hover:bg-gray-700 group"
+                        >
+                          <PiStudent class="w-5 h-5 text-gray-400" />
+                          <span class="ms-3 text-sm font-medium text-gray-400">
+                            Students
+                          </span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/manage-users"
+                          class="flex items-center p-2 pl-6 text-slate-800 hover:bg-gray-700 group"
+                        >
+                          <RiAdminLine class="w-5 h-5 text-gray-400" />
+                          <span class="ms-3 text-sm font-medium text-gray-400">
+                            Teachers
+                          </span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/manage-classes"
+                          class="flex items-center p-2 pl-6 text-slate-800 hover:bg-gray-700 group"
+                        >
+                          <PiGraduationCapLight class="w-5 h-5 text-gray-400" />
+                          <span class="ms-3 text-sm font-medium text-gray-400">
+                            Classes
+                          </span>
+                        </Link>
+                      </li>
                     </>
                   )}
 
@@ -133,11 +181,11 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to="/"
-                          class={`flex items-center p-2 hover:bg-eee-100 group`}
+                          class={`flex items-center p-2 pl-6 hover:bg-gray-700 group`}
                           activeClassName="bg-eee-100"
                         >
-                          <IoHomeOutline class="w-5 h-5 text-eee-700" />
-                          <span class="ms-3 text-sm font-medium text-eee-700">
+                          <IoHomeOutline class="w-5 h-5 text-gray-400" />
+                          <span class="ms-3 text-sm font-medium text-gray-400">
                             Home
                           </span>
                         </Link>
@@ -146,10 +194,10 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to="/profile"
-                          class="flex items-center p-2 text-slate-800 hover:bg-eee-100 group"
+                          class="flex items-center p-2 pl-6 text-slate-800 hover:bg-gray-700 group"
                         >
-                          <LuUser class="w-5 h-5 text-eee-700" />
-                          <span class="ms-3 text-sm font-medium text-eee-700">
+                          <LuUser class="w-5 h-5 text-gray-400" />
+                          <span class="ms-3 text-sm font-medium text-gray-400">
                             Profile
                           </span>
                         </Link>
@@ -158,16 +206,14 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to="/classes"
-                          class="flex items-center p-2 text-slate-800 hover:bg-eee-100 group"
+                          class="flex items-center p-2 pl-6 text-slate-800 hover:bg-gray-700 group"
                         >
-                          <PiGraduationCap class="w-5 h-5 text-eee-700" />
-                          <span class="ms-3 text-sm font-medium text-eee-700">
+                          <PiGraduationCap class="w-5 h-5 text-gray-400" />
+                          <span class="ms-3 text-sm font-medium text-gray-400">
                             Classes
                           </span>
                         </Link>
                       </li>
-
-                      <hr />
                     </>
                   )}
                   <h3 class="ms-3 font-medium mb-4  mt-2 text-eee-500">
@@ -176,10 +222,10 @@ const AsideBar = () => {
                   <li>
                     <Link
                       to="/notification"
-                      class="flex items-center p-2 text-slate-800 hover:bg-eee-100 group"
+                      class="flex items-center p-2 pl-6 text-slate-800 hover:bg-gray-700 group"
                     >
-                      <IoNotificationsOutline class="w-5 h-5 text-eee-700" />
-                      <span class="ms-3 text-sm font-medium text-eee-700">
+                      <IoNotificationsOutline class="w-5 h-5 text-gray-400" />
+                      <span class="ms-3 text-sm font-medium text-gray-400">
                         Notifications
                       </span>
                     </Link>
@@ -187,22 +233,22 @@ const AsideBar = () => {
                   <li>
                     <Link
                       to="/classes"
-                      class="flex items-center p-2 text-slate-800 hover:bg-eee-100 group"
+                      class="flex items-center p-2 pl-6 text-slate-800 hover:bg-gray-700 group"
                     >
-                      <IoMailOutline class="w-5 h-5 text-eee-700" />
-                      <span class="ms-3 text-sm font-medium text-eee-700">
+                      <IoMailOutline class="w-5 h-5 text-gray-400" />
+                      <span class="ms-3 text-sm font-medium text-gray-400">
                         Messages
                       </span>
                     </Link>
                   </li>
-                  <hr />
+
                   <li>
                     <div
                       onClick={handleLogout}
-                      class="flex items-center cursor-pointer p-2 text-slate-800 hover:bg-eee-100 group"
+                      class="flex items-center cursor-pointer p-2 text-slate-800 hover:bg-gray-700 group"
                     >
-                      <VscSignOut class="w-5 h-5 text-eee-700" />
-                      <span class="ms-3 text-sm font-medium text-eee-700">
+                      <VscSignOut class="w-5 h-5 text-gray-400" />
+                      <span class="ms-3 text-sm font-medium text-gray-400">
                         Logout
                       </span>
                     </div>
@@ -213,16 +259,15 @@ const AsideBar = () => {
           </div>
         </div>
         <div
-          className={`flex-grow h-full bg-white "
+          className={`flex-grow h-full bg-gradient-to-r from-gray-900 to-gray-800 "
            ${isOpen ? " pl-44" : ""}`}
         >
           <div>
             <Outlet />
           </div>
-          <hr />
 
           <div>
-            <footer class="bg-white mt-20 dark:bg-gray-900">
+            <footer class=" mt-20">
               <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div class="md:flex md:justify-between">
                   <div class="mb-6 md:mb-0">

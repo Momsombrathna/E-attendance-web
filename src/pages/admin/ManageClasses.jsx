@@ -112,7 +112,7 @@ const ManageClasses = () => {
 
   return (
     <>
-      <main className=" bg-white px-3  mb-20">
+      <main className=" px-3  mb-20">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="py-2">
             <div className="my-2">
@@ -130,9 +130,9 @@ const ManageClasses = () => {
                   </li>
                 </ul>
               </div>
-              <div className="bg-white border border-1 rounded-lg shadow-md p-2 md:p-4">
+              <div className="backdrop-blur-lg bg-white/10 rounded-lg p-2 md:p-4">
                 <div className="flex md:flex-row flex-col items-center">
-                  <h3 className="text-xl md:mb-0 mb-4 font-medium text-eee-700 ">
+                  <h3 className="text-xl md:mb-0 mb-4 font-medium text-gray-400 ">
                     Classes Management
                   </h3>
 
@@ -238,7 +238,7 @@ const ManageClasses = () => {
                         <th className="py-3 px-3 text-center">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="text-gray-600 text-sm font-light">
+                    <tbody className="text-gray-200 text-sm font-light">
                       {loading ? (
                         <tr>
                           <td colSpan="5" className="text-center py-4">
@@ -267,7 +267,7 @@ const ManageClasses = () => {
                         currentClasses.map((data, index) => (
                           <tr
                             key={index}
-                            className="border-b border-gray-200 hover:bg-gray-100"
+                            className="border-b border-gray-500 hover:bg-gray-600"
                           >
                             <td className="py-1 px-3 text-left whitespace-nowrap">
                               <div className="flex items-center">
@@ -307,7 +307,7 @@ const ManageClasses = () => {
                                 <div
                                   tabIndex={0}
                                   role="button"
-                                  className=" bg-eee-100 rounded-full p-2"
+                                  className=" bg-gray-600 rounded-full p-2"
                                 >
                                   <HiDotsHorizontal size={"1rem"} />
                                 </div>

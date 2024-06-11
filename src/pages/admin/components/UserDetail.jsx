@@ -47,13 +47,13 @@ const UserDetail = ({ userID }) => {
             />
           </div>
           <div className="flex flex-col justify-center">
-            <h2 className="text-md text-eee-700 fon-medium">
+            <h2 className="text-md text-eee-400 fon-medium">
               Username : <span className="text-blue-500">{user.username}</span>
             </h2>
-            <h2 className="text-md text-eee-700 fon-medium">
+            <h2 className="text-md text-eee-400 fon-medium">
               Role : <span className="text-blue-500">{user.role}</span>
             </h2>
-            <h2 className="text-md text-eee-700 fon-medium">
+            <h2 className="text-md text-eee-400 fon-medium">
               Verified :{" "}
               {user.verified === true ? (
                 <span className="text-green-500">Yes</span>

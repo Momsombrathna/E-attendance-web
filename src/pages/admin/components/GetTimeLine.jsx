@@ -45,10 +45,10 @@ const User = ({ id }) => {
             </div>
           </div>
         ) : (
-          <div className="flex flex-row gap-1">
+          <div className="flex p-2 flex-row gap-1">
             <div>
               <img
-                className=" rounded-full w-16 h-16"
+                className=" rounded-full w-14 h-14"
                 src={user.profile}
                 alt="class-profile"
               />
@@ -124,8 +124,8 @@ const GetTimeLine = ({ classId }) => {
       ) : (
         <div className="flex flex-col gap-4">
           <div className="flex  flex-col gap-2">
-            <table className="min-w-full text-center divide-y divide-gray-200">
-              <thead className="bg-eee-100 border border-1  w-full">
+            <table className="min-w-full text-center divide-y divide-gray-500">
+              <thead className="bg-gray-200 border border-1  w-full">
                 <tr>
                   <th className="px-6 py-3 text-center text-xs font-medium text-gray-800 uppercase tracking-wider">
                     Description
@@ -150,7 +150,7 @@ const GetTimeLine = ({ classId }) => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white rounded-xl divide-y divide-gray-200">
+              <tbody className="bg-gray-400 rounded-xl divide-y divide-gray-500">
                 {attendances.attendance.map((data, index) => (
                   <tr key={index}>
                     <td className="px-6 py-4 border whitespace-nowrap">

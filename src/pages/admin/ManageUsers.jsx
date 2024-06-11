@@ -143,7 +143,7 @@ const ManageUsers = () => {
 
   return (
     <>
-      <main className=" bg-white px-3 mb-20 ">
+      <main className=" px-3 mb-20 ">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="py-2">
             <div className="my-2">
@@ -161,9 +161,9 @@ const ManageUsers = () => {
                   </li>
                 </ul>
               </div>
-              <div className="bg-white rounded-lg border border-1 shadow-md p-2 md:p-4">
+              <div className=" backdrop-blur-lg bg-white/10 rounded-lg p-2 md:p-4">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-medium text-eee-700">
+                  <h3 className="text-2xl font-medium text-gray-400">
                     Users Management
                   </h3>
                   <form
@@ -257,7 +257,7 @@ const ManageUsers = () => {
                 <div className="mt-2">
                   <table className="w-full table-auto">
                     <thead>
-                      <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                      <tr className=" bg-gray-600 text-gray-200 uppercase text-sm leading-normal">
                         <th className="py-3 px-3 text-left">User Profile</th>
                         <th className="py-3 px-3 text-left">User Name</th>
                         <th className="py-3 px-3 text-left">Email</th>
@@ -267,7 +267,7 @@ const ManageUsers = () => {
                         <th className="py-3 px-3 text-center">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="text-gray-600 text-sm font-light">
+                    <tbody className="text-gray-200 text-sm font-light">
                       {loading ? (
                         <tr>
                           <td colspan="7" className="text-center py-4">
@@ -296,7 +296,7 @@ const ManageUsers = () => {
                         currentUsers.map((user, index) => (
                           <tr
                             key={index}
-                            className="border-b border-gray-200 hover:bg-gray-100"
+                            className="border-b border-gray-500 hover:bg-gray-600"
                           >
                             <td className="py-1 px-3 max-w-15 text-left whitespace-nowrap">
                               <div className="flex items-center">
@@ -334,7 +334,7 @@ const ManageUsers = () => {
                                   <div
                                     tabIndex={0}
                                     role="button"
-                                    className=" p-1 bg-gray-200 rounded-full hover:bg-gray-300"
+                                    className=" p-1 bg-gray-500 rounded-full hover:bg-gray-300"
                                   >
                                     <FaCaretDown />
                                   </div>
