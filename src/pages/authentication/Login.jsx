@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api_url } from "../../api/config";
 import MoonLoader from "react-spinners/MoonLoader";
 import Logo from "../../assets/e-attendance.png";
-import Swal from "sweetalert2";
-import Cookies from "js-cookie";
 import { login } from "../../context/AuthContext";
 
 const Login = () => {

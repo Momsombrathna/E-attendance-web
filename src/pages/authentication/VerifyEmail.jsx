@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { api_url } from "../../api/config";
 import MoonLoader from "react-spinners/MoonLoader";
-import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
 import Logo from "../../assets/e-attendance.png";
 import { login } from "../../context/AuthContext";

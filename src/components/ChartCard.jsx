@@ -1,13 +1,7 @@
 import React from "react";
-import { PiStudent } from "react-icons/pi";
-import { PiChalkboardTeacher } from "react-icons/pi";
-import { PiGraduationCap } from "react-icons/pi";
-import { IoPeopleOutline } from "react-icons/io5";
 import { FaIdCard } from "react-icons/fa";
 import PieCharts from "../partials/PieCharts";
 import UserActivityChart from "../partials/UserActivityChart";
-import { RiAdminLine } from "react-icons/ri";
-import { FaRegUser } from "react-icons/fa6";
 import UsersChart from "../partials/UsersChart";
 import ClassAndTeacherCharts from "../partials/ClassAndTeacherChart";
 
