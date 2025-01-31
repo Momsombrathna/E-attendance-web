@@ -67,20 +67,20 @@ const ResetPass = () => {
   };
 
   return (
-    <div class="min-h-screen bg-white flex flex-col justify-center sm:px-6 lg:px-8">
+    <div class="min-h-screen bg-base-100 flex flex-col justify-center sm:px-6 lg:px-8">
       <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-2">
-        <div class="bg-white py-4 px-4 shadow border border-1 rounded-xl sm:px-10">
+        <div class="bg-base-100 py-4 px-4 rounded-xl sm:px-10">
           <div class="sm:mx-auto sm:w-full mb-2 sm:max-w-md">
-            <img class="mx-auto h-16 w-auto" src={Logo} alt="Workflow" />
+            <img class="mx-auto h-28 w-auto" src={Logo} alt="Workflow" />
           </div>
-          <p class="flex text-eee-700 font-bold text-xl justify-center items-center mb-2">
+          <p class="flex text-base-700 font-bold text-xl justify-center items-center mb-2">
             Set new password
           </p>
           <form method="POST" onSubmit={handleSubmit} className="relative">
             <div class="mt-6 relative">
               <label
                 for="password"
-                class="block text-sm font-medium leading-5 text-gray-700"
+                class="block text-sm font-medium leading-5 text-base-700"
               >
                 New Password
               </label>
@@ -92,7 +92,7 @@ const ResetPass = () => {
                   type={showPassword ? "text" : "password"}
                   required=""
                   onChange={(e) => setPassword(e.target.value)}
-                  className={`mt-1 appearance-none block w-full px-3 py-2 border text-gray-800 border-gray-300 rounded-md placeholder-gray-400 focus:outline-none  focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 ${
+                  className={`mt-1 bg-base-200 block w-full px-3 py-2 border text-base-800 border-base-200 rounded-md placeholder-gray-400 focus:outline-none  focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 ${
                     errors.password ? "border-red-500" : ""
                   }`}
                 />
@@ -110,7 +110,7 @@ const ResetPass = () => {
             <div class="mt-6 relative">
               <label
                 for="password_confirmation"
-                class="block text-sm font-medium leading-5 text-gray-700"
+                class="block text-sm font-medium leading-5 text-base-700"
               >
                 Confirm New Password
               </label>
@@ -122,7 +122,7 @@ const ResetPass = () => {
                   type={showPassword ? "text" : "password"}
                   required=""
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className={`mt-1 appearance-none block w-full px-3 py-2 border text-gray-800 border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 ${
+                  className={`mt-1 bg-base-200 block w-full px-3 py-2 border text-base-800 border-base-200 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 ${
                     errors.confirmPassword ? "border-red-500" : ""
                   }`}
                 />
@@ -148,7 +148,7 @@ const ResetPass = () => {
               />
               <label
                 for="default-checkbox"
-                class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300"
+                class="ms-2 text-xs font-medium text-base-900 dark:text-gray-300"
               >
                 Show Password
               </label>
@@ -158,15 +158,15 @@ const ResetPass = () => {
               <span class="block w-full rounded-md shadow-sm">
                 <button
                   type="submit"
-                  class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                  class="w-full h-12 flex justify-center items-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
                 >
                   {isLoading ? (
                     <div className="flex flex-row justify-center items-center gap-1">
                       <MoonLoader size={20} color="#fff" loading={true} />
-                      <span className="text-eee-100 text-xs">Sending...</span>
+                      {/* <span className="text-eee-100 text-xs">Sending...</span> */}
                     </div>
                   ) : (
-                    "Submit"
+                    "SUBMIT"
                   )}
                 </button>
               </span>

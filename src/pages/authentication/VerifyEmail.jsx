@@ -20,7 +20,24 @@ const OTPInput = ({ length = 6, errorMessage, inputOTP }) => {
     inputOTP(newOTP.join(""));
   };
 
+  const validKeyForPayment = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "Backspace",
+  ];
+
   const handleKeyDown = (index, event) => {
+    if (!validKeyForPayment.includes(event.key)) {
+      event.preventDefault();
+    }
     if (event.key === "Backspace" && index > 0 && otp[index] === "") {
       inputsRef.current[index - 1].focus();
     }
@@ -36,7 +53,9 @@ const OTPInput = ({ length = 6, errorMessage, inputOTP }) => {
               ref={(ref) => (inputsRef.current[index] = ref)}
               type="text"
               maxLength="1"
-              className={`w-12 h-12 text-eee-600 text-2xl text-center border border-gray-300 rounded-lg mx-1 focus:outline-none focus:border-blue-500
+              inputMode="numeric"
+              pattern="[0-9]*"
+              className={`w-12 h-12 text-base-600 text-2xl bg-base-200 text-center border border-base-100 rounded-lg mx-1 focus:outline-none focus:border-blue-500
                 ${errorMessage ? "border-red-500" : " "}
               `}
               value={digit}
@@ -134,18 +153,18 @@ const VerifyEmail = () => {
 
   return (
     <>
-      <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-eee-100 py-12">
-        <div class="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
+      <div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-base-100 py-12">
+        <div class="relative bg-base-100 px-6 pt-10 pb-9 mx-auto w-full max-w-lg rounded-2xl">
           <div class="mx-auto flex w-full max-w-md flex-col space-y-10">
             <div class="flex flex-col items-center justify-center text-center space-y-2">
-              <img class="mx-auto h-16 w-auto" src={Logo} />
-              <div class="font-semibold text-3xl text-eee-700">
+              <img class="mx-auto h-28 w-auto" src={Logo} alt="logo" />
+              <div class="font-semibold text-3xl text-base-700">
                 <p>Email Verification</p>
               </div>
               <div class="flex flex-row text-sm font-medium text-gray-400">
                 <p>
                   We have sent a code to your email{" "}
-                  <span class=" text-eee-700">{email}</span>
+                  <span class=" text-base-700">{email}</span>
                 </p>
               </div>
             </div>
@@ -164,19 +183,17 @@ const VerifyEmail = () => {
                 />
               </div>
 
-              <div class="flex flex-col space-y-5 mt-10">
-                <div>
-                  <button class="flex flex-row items-center justify-center text-center w-full border rounded-lg outline-none py-2 bg-blue-700 border-none text-white text-sm shadow-sm">
-                    {isLoading ? (
-                      <div className="flex flex-row justify-center items-center gap-1">
-                        <MoonLoader size={20} color="#fff" loading={true} />
-                        <span className="text-eee-100 text-xs">Sending...</span>
-                      </div>
-                    ) : (
-                      <span>Verify Account</span>
-                    )}
-                  </button>
-                </div>
+              <div class="flex flex-col justify-center items-center space-y-5 mt-10">
+                <button class="flex flex-row h-10 items-center justify-center text-center w-80 border rounded-lg outline-none py-2 bg-blue-700 border-none text-white text-sm shadow-sm">
+                  {isLoading ? (
+                    <div className="flex flex-row justify-center items-center gap-1">
+                      <MoonLoader size={16} color="#fff" loading={true} />
+                      {/* <span className="text-eee-100 text-xs">Sending...</span> */}
+                    </div>
+                  ) : (
+                    <span>Verify Account</span>
+                  )}
+                </button>
 
                 <div class="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                   <p>Didn't receive the code?</p>{" "}

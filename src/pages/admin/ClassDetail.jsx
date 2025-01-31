@@ -11,6 +11,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import UserDetail from "./components/UserDetail";
 import GetTimeLine from "./components/GetTimeLine";
 import axios from "axios";
+import { adminRoutes } from "../../routes/routesPoint";
 
 const ClassDetail = () => {
   const { classId } = useParams();
@@ -117,13 +118,16 @@ const ClassDetail = () => {
               <div className=" breadcrumbs">
                 <ul>
                   <li className="text-lg">
-                    <Link to="/" className="text-blue-500">
+                    <Link to={adminRoutes.dashboard} className="text-blue-500">
                       <LuLayoutDashboard className="w-6 h-6 pr-2" />
                       Dashboard
                     </Link>
                   </li>
                   <li className="text-lg">
-                    <Link to="/manage-classes" className="text-blue-500">
+                    <Link
+                      to={adminRoutes.manageClasses}
+                      className="text-blue-500"
+                    >
                       <PiGraduationCap className="w-6 h-6 pr-2" />
                       classes
                     </Link>

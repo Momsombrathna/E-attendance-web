@@ -10,6 +10,7 @@ import { RiAdminLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa6";
 import UsersChart from "../partials/UsersChart";
 import ClassAndTeacherCharts from "../partials/ClassAndTeacherChart";
+import { adminRoutes } from "../routes/routesPoint";
 
 const AdminCard = ({
   total_all_users,
@@ -27,7 +28,7 @@ const AdminCard = ({
       <section className="flex w-auto flex-col ">
         <main className="flex gap-2 justify-center">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mt-3">
-            <a href="/manage-users">
+            <a href={adminRoutes.manageUsers}>
               <div className=" backdrop-blur-xl bg-white/10  md:w-64 w-80 hover:bg-white/20  h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-pink-100 rounded-full p-2">
@@ -45,7 +46,7 @@ const AdminCard = ({
               </div>
             </a>
 
-            <a href="/manage-users">
+            <a href={adminRoutes.manageUsers}>
               <div className="backdrop-blur-xl bg-white/10  md:w-64 w-80 hover:bg-white/20  h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-yellow-100 rounded-full p-2">
@@ -63,7 +64,7 @@ const AdminCard = ({
               </div>
             </a>
 
-            <a href="manage-users">
+            <a href={adminRoutes.manageUsers}>
               <div className="backdrop-blur-xl bg-white/10  md:w-64 w-80 hover:bg-white/20 h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-green-100 rounded-full p-2">
@@ -81,7 +82,7 @@ const AdminCard = ({
               </div>
             </a>
 
-            <a href="/manage-classes">
+            <a href={adminRoutes.manageClasses}>
               <div className="backdrop-blur-xl bg-white/10  md:w-64 w-80 hover:bg-white/20 h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-blue-100 rounded-full p-2">
@@ -99,7 +100,7 @@ const AdminCard = ({
               </div>
             </a>
 
-            <a href="/manage-users">
+            <a href={adminRoutes.manageUsers}>
               <div className="backdrop-blur-xl bg-white/10 md:w-64 w-80 hover:bg-white/20 h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-purple-100 rounded-full p-2">
@@ -117,7 +118,7 @@ const AdminCard = ({
               </div>
             </a>
 
-            <a href="/manage-users">
+            <a href={adminRoutes.manageUsers}>
               <div className="backdrop-blur-xl bg-white/10 md:w-64 w-80 hover:bg-white/20 h-24 rounded-lg shadow-md flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-red-100 rounded-full p-2">

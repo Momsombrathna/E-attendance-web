@@ -12,6 +12,7 @@ import { PiGraduationCap } from "react-icons/pi";
 import CryptoJs from "crypto-js";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { adminRoutes } from "../../routes/routesPoint";
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -119,7 +120,7 @@ const ManageClasses = () => {
               <div className=" breadcrumbs">
                 <ul>
                   <li className="text-lg">
-                    <Link to="/" className="text-blue-500">
+                    <Link to={adminRoutes.dashboard} className="text-blue-500">
                       <LuLayoutDashboard className="w-6 h-6 pr-2" />
                       Dashboard
                     </Link>

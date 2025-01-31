@@ -4,6 +4,8 @@ const api_url = process.env.REACT_APP_API_URL;
 
 const tokenID = Cookies.get("token");
 const userID = Cookies.get("userId");
+const userProfile = Cookies.get("profile");
+
 let decodedToken = "";
 let decodedUserID = "";
 
@@ -23,4 +25,4 @@ if (userID) {
   }
 }
 
-export { api_url, decodedToken, decodedUserID };
+export { api_url, decodedToken, decodedUserID, userProfile };

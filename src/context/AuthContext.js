@@ -1,6 +1,9 @@
 import Cookies from "js-cookie";
 import { api_url, decodedToken, decodedUserID } from "../api/config";
 import Swal from "sweetalert2";
+import { apiAuthRequest } from "../api/apiService";
+import apiPoints from "../api/endpoints";
+import { adminRoutes, userRoutes, authRoutes } from "../routes/routesPoint";
 
 const login = async (data) => {
   const { username, password, setIsLoading, setErrors } = data;
@@ -11,21 +14,19 @@ const login = async (data) => {
   };
 
   try {
-    response = await fetch(`${api_url}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    });
+    setIsLoading(true);
+    response = await apiAuthRequest(
+      apiPoints.auth.login,
+      apiPoints.methods.POST,
+      JSON.stringify(loginData)
+    );
 
-    const result = await response.json();
-    console.log(result);
+    const result = response.data;
 
-    if (!response.ok) {
+    if (response.status !== 200) {
       setIsLoading(false);
       setErrors({
-        message: result.error || "An error occurred. Please try again",
+        message: result.message || "An error occurred. Please try again",
       });
     } else {
       setIsLoading(false);
@@ -40,24 +41,18 @@ const login = async (data) => {
       Cookies.set("email", result.user.email, { expires: 30 });
       Cookies.set("profile", result.user.profile, { expires: 30 });
 
-      window.location.href = "/";
+      if (result.user.role === "admin") {
+        window.location.href = adminRoutes.dashboard;
+      } else if (result.user.role === "user") {
+        window.location.href = userRoutes.home;
+      }
     }
   } catch (error) {
-    console.log(error);
     setIsLoading(false);
-    if (response.status === 500) {
-      setErrors({ message: "Server error, try again later" });
-    } else if (response.status === 401) {
-      setErrors({ message: "Invalid credentials" });
-    } else if (response.status === 404) {
-      setErrors({ message: "User not found" });
-    } else if (response.status === 400) {
-      setErrors({ message: "Bad request your email is not verified" });
-    } else if (response.status === 403) {
-      setErrors({ message: "Forbidden" });
-    } else {
-      setErrors({ message: "An error occurred, try again later" });
-    }
+    setErrors({
+      message: error.message || "An error occurred. Please try again",
+    });
+    console.log("Login error:", error);
   }
 };
 
@@ -73,8 +68,17 @@ const logout = () => {
     confirmButtonText: "Yes, logout",
   }).then((result) => {
     if (result.isConfirmed) {
-      fetch(`${api_url}/auth/logout/${decodedUserID}`, {
-        method: "POST",
+      Swal.fire({
+        title: "Logging out...",
+        text: "Please wait",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      fetch(`${api_url}${apiPoints.auth.logout}`, {
+        method: apiPoints.methods.POST,
         headers: {
           "auth-token": decodedToken,
         },
@@ -85,10 +89,19 @@ const logout = () => {
           Cookies.remove("token");
           Cookies.remove("userId");
           Cookies.remove("role");
-          window.location.href = "/login";
+          Cookies.remove("username");
+          Cookies.remove("email");
+          Cookies.remove("profile");
+          Swal.close();
+          window.location.href = authRoutes.login;
         })
         .catch((err) => {
           console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
         });
     }
   });

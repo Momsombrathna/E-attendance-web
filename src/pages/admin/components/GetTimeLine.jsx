@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { api_url, decodedToken } from "../../../api/config";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import axios from "axios";
@@ -12,11 +12,7 @@ const User = ({ id }) => {
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchUser();
-  }, [id]);
-
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
     try {
       fetch(`${api_url}/admin/get-user/${id}`, {
         method: "GET",
@@ -29,11 +25,14 @@ const User = ({ id }) => {
           setLoading(false);
           setUser(data);
         });
-    } catch (err) {
-      console.error(err);
-      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching user:", error);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   return (
     <>

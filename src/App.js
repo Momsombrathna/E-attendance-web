@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Dashboard from "./pages/admin/Dashboard";
 import Login from "./pages/authentication/Login";
-// import Register from "./pages/authentication/Register";
+import Register from "./pages/authentication/Register";
 import ResetPass from "./pages/authentication/reset_password/ResetPass";
 import VerifyResetPass from "./pages/authentication/reset_password/VerifyResetPass";
 import SetNewPass from "./pages/authentication/reset_password/SetNewPass";
@@ -15,6 +15,7 @@ import AsideBar from "./components/AsideBar";
 import ErrorPage from "./pages/ErrorPage";
 import VerifyEmail from "./pages/authentication/VerifyEmail";
 import Profile from "./pages/users/Profile";
+import UserHome from "./pages/users/UserHome";
 import Home from "./pages/Home";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageClasses from "./pages/admin/ManageClasses";
@@ -27,10 +28,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="*" element={<ErrorPage />} />
-          {/* <Route
+          <Route
             path="/register"
             element={isNotLogged() ? <Register /> : <Navigate to="/" />}
-          /> */}
+          />
           <Route
             path="/login"
             element={isNotLogged() ? <Login /> : <Navigate to="/" />}
@@ -68,7 +69,7 @@ function App() {
 
             {/* Admin Router */}
             <Route
-              path="/"
+              path="/dashboard"
               element={
                 isLogged() && isAdmin() ? (
                   <Dashboard />
@@ -109,6 +110,12 @@ function App() {
             />
 
             {/* User Router */}
+            <Route
+              path="/user-home"
+              element={
+                isLogged() && isUser() ? <UserHome /> : <Navigate to="/login" />
+              }
+            />
             <Route
               path="/profile"
               element={

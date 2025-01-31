@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { api_url, decodedToken, decodedUserID } from "../../api/config";
+import { api_url, decodedToken } from "../../api/config";
 import ReactPaginate from "react-paginate";
 import { GrFormNext } from "react-icons/gr";
 import { GrFormPrevious } from "react-icons/gr";
@@ -13,6 +13,7 @@ import { FaCheck } from "react-icons/fa";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { FaCaretDown } from "react-icons/fa";
 import axios from "axios";
+import { adminRoutes } from "../../routes/routesPoint";
 
 const ManageUsers = () => {
   const [user, setUser] = useState([]);
@@ -150,7 +151,7 @@ const ManageUsers = () => {
               <div className=" breadcrumbs">
                 <ul>
                   <li className="text-lg">
-                    <Link to="/" className="text-blue-500">
+                    <Link to={adminRoutes.dashboard} className="text-blue-500">
                       <LuLayoutDashboard className="w-6 h-6 pr-2" />
                       Dashboard
                     </Link>

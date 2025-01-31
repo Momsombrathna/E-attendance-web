@@ -102,7 +102,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <main className=" bg-gradient-to-r from-gray-900 to-gray-800 mb-10">
+      <main className=" bg-gradient-to-r mb-10">
         <h1 className="text-2xl text-gray-500 font-medium p-3 pl-7 md:pl-16">
           <br />
           DASHBOARD
