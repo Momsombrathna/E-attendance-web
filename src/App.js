@@ -20,6 +20,7 @@ import Home from "./pages/Home";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageClasses from "./pages/admin/ManageClasses";
 import ClassDetail from "./pages/admin/ClassDetail";
+import { Analytics } from "@vercel/analytics/react";
 import { isAdmin, isUser, isLogged, isNotLogged } from "./context/AuthContext";
 
 function App() {
@@ -109,6 +110,20 @@ function App() {
               }
             />
 
+            <Route
+              path="/"
+              element={
+                isLogged() && (isAdmin() || isUser()) ? (
+                  isAdmin() ? (
+                    <Dashboard />
+                  ) : (
+                    <UserHome />
+                  )
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
             {/* User Router */}
             <Route
               path="/user-home"
@@ -129,6 +144,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <Analytics />
     </>
   );
 }

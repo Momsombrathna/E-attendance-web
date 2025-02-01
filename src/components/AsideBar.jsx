@@ -364,16 +364,6 @@ const AsideBar = () => {
           <div className="h-full mt-12">
             <Outlet />
           </div>
-
-          <div>
-            <footer>
-              <section class="flex flex-row justify-center items-center bg-base-100">
-                <p class="text-xs mt-1 flex justify-center items-center font-medium text-base-400">
-                  &copy; 2024 E-attendance
-                </p>
-              </section>
-            </footer>
-          </div>
         </div>
       </div>
     </>
