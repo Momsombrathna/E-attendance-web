@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { IoChevronBackSharp } from "react-icons/io5";
-import { IoChevronForward } from "react-icons/io5";
-import { VscSignOut } from "react-icons/vsc";
+//import { IoChevronBackSharp } from "react-icons/io5";
+//import { IoChevronForward } from "react-icons/io5";
+//import { VscSignOut } from "react-icons/vsc";
 import { PiGraduationCap } from "react-icons/pi";
 import { LuUser } from "react-icons/lu";
 import { IoHomeOutline } from "react-icons/io5";
@@ -67,8 +67,8 @@ const AsideBar = () => {
 
   return (
     <>
-      <div className="flex flex-row ">
-        <div className=" max-h-lvh">
+      <div className="flex flex-row h-screen">
+        <div className="max-h-full">
           <div
             className={`fixed z-40 top-0 left-0 w-44 h-full bg-base-100 border-r border-base-300 transform transition-all duration-200 ${
               isOpen ? "translate-x-0" : "-translate-x-full"
@@ -76,22 +76,21 @@ const AsideBar = () => {
           >
             {/* Add your drawer content here */}
 
-            <div className=" mt-16">
-              <div class="py-4 overflow-y-auto">
-                <ul class="space-y-1 font-medium">
+            <div className="mt-16">
+              <div className="py-4 overflow-y-auto">
+                <ul className="space-y-1 font-medium">
                   {isAdmin() && (
                     <>
-                      <h3 class="ms-3 font-medium mb-4 text-eee-500">
+                      <h3 className="ms-3 font-medium mb-4 text-eee-500">
                         ADMIN SCREEN
                       </h3>
                       <li>
                         <Link
                           to={adminRoutes.dashboard}
-                          class={`flex items-center p-2 pl-6 hover:bg-base-200 group
-                        `}
+                          className="flex items-center p-2 pl-6 hover:bg-base-200 group"
                         >
-                          <LuLayoutDashboard class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <LuLayoutDashboard className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Dashboard
                           </span>
                         </Link>
@@ -99,10 +98,10 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to={adminRoutes.manageUsers}
-                          class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                          className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                         >
-                          <FaUsers class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <FaUsers className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Users
                           </span>
                         </Link>
@@ -110,10 +109,10 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to={adminRoutes.manageUsers}
-                          class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                          className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                         >
-                          <PiStudent class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <PiStudent className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Students
                           </span>
                         </Link>
@@ -121,10 +120,10 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to={adminRoutes.manageUsers}
-                          class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                          className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                         >
-                          <RiAdminLine class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <RiAdminLine className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Teachers
                           </span>
                         </Link>
@@ -132,10 +131,10 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to={adminRoutes.manageClasses}
-                          class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                          className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                         >
-                          <PiGraduationCapLight class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <PiGraduationCapLight className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Classes
                           </span>
                         </Link>
@@ -145,17 +144,16 @@ const AsideBar = () => {
 
                   {isUser() && (
                     <>
-                      <h3 class="ms-3 font-medium mb-4 text-eee-500">
+                      <h3 className="ms-3 font-medium mb-4 text-eee-500">
                         USER SCREEN
                       </h3>
                       <li>
                         <Link
                           to={userRoutes.home}
-                          class={`flex items-center p-2 pl-6 hover:bg-base-200 group`}
-                          activeClassName="bg-eee-100"
+                          className="flex items-center p-2 pl-6 hover:bg-base-200 group"
                         >
-                          <IoHomeOutline class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <IoHomeOutline className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Home
                           </span>
                         </Link>
@@ -164,10 +162,10 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to={userRoutes.profile}
-                          class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                          className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                         >
-                          <LuUser class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <LuUser className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Profile
                           </span>
                         </Link>
@@ -176,10 +174,10 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to="/classes"
-                          class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                          className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                         >
-                          <PiGraduationCap class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <PiGraduationCap className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Classes
                           </span>
                         </Link>
@@ -187,26 +185,26 @@ const AsideBar = () => {
                       <li>
                         <Link
                           to="/attendance"
-                          class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                          className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                         >
-                          <PiGraduationCap class="w-5 h-5 text-base-400" />
-                          <span class="ms-3 text-sm font-medium text-base-400">
+                          <PiGraduationCap className="w-5 h-5 text-base-400" />
+                          <span className="ms-3 text-sm font-medium text-base-400">
                             Join Class
                           </span>
                         </Link>
                       </li>
                     </>
                   )}
-                  <h3 class="ms-3 font-medium mb-4  mt-2 text-eee-500">
+                  <h3 className="ms-3 font-medium mb-4 mt-2 text-eee-500">
                     PERSONAL
                   </h3>
                   <li>
                     <Link
                       to="/notification"
-                      class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                      className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                     >
-                      <IoNotificationsOutline class="w-5 h-5 text-base-400" />
-                      <span class="ms-3 text-sm font-medium text-base-400">
+                      <IoNotificationsOutline className="w-5 h-5 text-base-400" />
+                      <span className="ms-3 text-sm font-medium text-base-400">
                         Notifications
                       </span>
                     </Link>
@@ -214,77 +212,46 @@ const AsideBar = () => {
                   <li>
                     <Link
                       to="/classes"
-                      class="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
+                      className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
                     >
-                      <IoMailOutline class="w-5 h-5 text-base-400" />
-                      <span class="ms-3 text-sm font-medium text-base-400">
+                      <IoMailOutline className="w-5 h-5 text-base-400" />
+                      <span className="ms-3 text-sm font-medium text-base-400">
                         Messages
                       </span>
                     </Link>
                   </li>
-
-                  {/* <li>
-                    <div
-                      onClick={handleLogout}
-                      class="flex items-center cursor-pointer p-2 text-base-400 hover:bg-base-200 group"
-                    >
-                      <VscSignOut class="w-5 h-5 text-base-400" />
-                      <span class="ms-3 text-sm font-medium text-base-400">
-                        Logout
-                      </span>
-                    </div>
-                  </li> */}
                 </ul>
               </div>
             </div>
           </div>
         </div>
         <div
-          className={`
-            w-full h-screen overflow-y-auto
-            bg-base-200
-            transition-all duration-200 ease-in-out
-            "
-           ${isOpen ? " pl-44" : ""}`}
+          className={`w-full h-screen overflow-hidden bg-base-200 transition-all duration-200 ease-in-out ${
+            isOpen ? "pl-44" : ""
+          }`}
         >
-          <nav
-            className="
-            fixed top-0 left-0 right-0 z-50
-            flex items-center justify-between h-16
-            bg-base-300
-          "
-          >
+          <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-16 bg-base-300">
             <div className="navbar">
-              <div className=" flex-1">
+              <div className="flex-1">
                 {isOpen ? (
                   <BiChevronsLeft
                     onClick={handleDrawer}
-                    className="w-8 h-8 text-base-400
-                    bg-base-100
-                    hover:bg-base-200
-                    rounded-md
-                    p-1
-                     cursor-pointer"
+                    className="w-8 h-8 text-base-400 bg-base-100 hover:bg-base-200 rounded-md p-1 cursor-pointer"
                   />
                 ) : (
                   <BiChevronsRight
                     onClick={handleDrawer}
-                    className="w-8 h-8
-                    bg-base-100
-                    hover:bg-base-200
-                    rounded-md
-                    p-1
-                     text-base-400 cursor-pointer"
+                    className="w-8 h-8 bg-base-100 hover:bg-base-200 rounded-md p-1 text-base-400 cursor-pointer"
                   />
                 )}
 
                 <div className="hidden md:flex items-center px-4">
                   <img
                     src={Logo}
-                    class=" h-10 w-auto me-3 sm:h-7"
+                    className="h-10 w-auto me-3 sm:h-7"
                     alt="e-attendance"
                   />
-                  <p class="self-center pr-2 md:text-lg text-md font-bold whitespace-nowrap text-e_attendance-200">
+                  <p className="self-center pr-2 md:text-lg text-md font-bold whitespace-nowrap text-e_attendance-200">
                     E-attendance
                   </p>
                 </div>
@@ -293,30 +260,12 @@ const AsideBar = () => {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="
-                      input input-ghost
-                      bg-base-100
-                      rounded-md
-                      md:rounded-lg
-                      border border-base-200
-                      w-64
-                      md:w-96
-                      "
+                  className="input input-ghost bg-base-100 rounded-md md:rounded-lg border border-base-200 w-64 md:w-96"
                 />
 
                 <button className="btn btn-square btn-ghost relative">
                   <IoNotificationsOutline className="w-6 h-6 text-base-400" />
-                  <span
-                    className="
-                      badge
-                      badge-sm
-                      badge-outline
-                      absolute top-1
-                      right-1
-                      bg-primary
-                      p-1
-                      text-primary-content"
-                  >
+                  <span className="badge badge-sm badge-outline absolute top-1 right-1 bg-primary p-1 text-primary-content">
                     {messageCount > 99 ? "99+" : messageCount}
                   </span>
                 </button>
@@ -361,7 +310,11 @@ const AsideBar = () => {
             </div>
           </nav>
 
-          <div className="h-full mt-12">
+          <div
+            className="h-full mt-12
+          overflow-y-auto bg-base-200
+          "
+          >
             <Outlet />
           </div>
         </div>

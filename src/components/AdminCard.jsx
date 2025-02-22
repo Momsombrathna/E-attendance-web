@@ -29,13 +29,13 @@ const AdminCard = ({
         <main className="flex gap-2 justify-center">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mt-3">
             <a href={adminRoutes.manageUsers}>
-              <div className=" backdrop-blur-xl bg-white/10  md:w-64 w-80 hover:bg-white/20  h-24 rounded-lg shadow-md flex items-center justify-center">
+              <div className="  bg-base-800  md:w-64 w-80 hover:border hover:border-pink-500 h-24 rounded-lg bg-base-300 flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-pink-100 rounded-full p-2">
                     <IoPeopleOutline className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-gray-700" />
                   </div>
                   <div className="flex w-52 flex-col">
-                    <p className="text-lg md:text-lg text-gray-200 font-medium">
+                    <p className="text-lg md:text-lg text-base-800 font-medium">
                       All Users
                     </p>
                     <p className="text-2xl text-pink-500 md:text-md font-medium">
@@ -47,13 +47,13 @@ const AdminCard = ({
             </a>
 
             <a href={adminRoutes.manageUsers}>
-              <div className="backdrop-blur-xl bg-white/10  md:w-64 w-80 hover:bg-white/20  h-24 rounded-lg shadow-md flex items-center justify-center">
+              <div className="  hover:border hover:border-yellow-500  md:w-64 w-80   h-24 rounded-lg bg-base-300 flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-yellow-100 rounded-full p-2">
                     <PiStudent className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-gray-700" />
                   </div>
                   <div className="flex w-52 flex-col">
-                    <p className="text-lg md:text-lg text-gray-200 font-medium">
+                    <p className="text-lg md:text-lg text-base-800 font-medium">
                       Students
                     </p>
                     <p className="text-2xl md:text-md text-yellow-500 font-medium">
@@ -65,13 +65,13 @@ const AdminCard = ({
             </a>
 
             <a href={adminRoutes.manageUsers}>
-              <div className="backdrop-blur-xl bg-white/10  md:w-64 w-80 hover:bg-white/20 h-24 rounded-lg shadow-md flex items-center justify-center">
+              <div className=" hover:border hover:border-green-500  md:w-64 w-80  h-24 rounded-lg bg-base-300 flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-green-100 rounded-full p-2">
                     <PiChalkboardTeacher className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-gray-700" />
                   </div>
                   <div className="flex w-52 flex-col">
-                    <p className="text-lg md:text-lg text-gray-200 font-medium">
+                    <p className="text-lg md:text-lg text-base-800 font-medium">
                       Teachers
                     </p>
                     <p className="text-2xl md:text-md text-green-500 font-medium">
@@ -83,13 +83,13 @@ const AdminCard = ({
             </a>
 
             <a href={adminRoutes.manageClasses}>
-              <div className="backdrop-blur-xl bg-white/10  md:w-64 w-80 hover:bg-white/20 h-24 rounded-lg shadow-md flex items-center justify-center">
+              <div className=" hover:border hover:border-blue-500  md:w-64 w-80  h-24 rounded-lg bg-base-300 flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-blue-100 rounded-full p-2">
                     <PiGraduationCap className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-gray-700" />
                   </div>
                   <div className="flex w-52 flex-col">
-                    <p className="text-lg md:text-lg text-gray-200 font-medium">
+                    <p className="text-lg md:text-lg text-base-800 font-medium">
                       Classes
                     </p>
                     <p className="text-2xl md:text-md text-blue-500 font-medium">
@@ -101,13 +101,13 @@ const AdminCard = ({
             </a>
 
             <a href={adminRoutes.manageUsers}>
-              <div className="backdrop-blur-xl bg-white/10 md:w-64 w-80 hover:bg-white/20 h-24 rounded-lg shadow-md flex items-center justify-center">
+              <div className="hover:border hover:border-purple-500  md:w-64 w-80  h-24 rounded-lg bg-base-300 flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-purple-100 rounded-full p-2">
                     <RiAdminLine className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-gray-700" />
                   </div>
                   <div className="flex w-52 flex-col">
-                    <p className="text-lg md:text-lg text-gray-200 font-medium">
+                    <p className="text-lg md:text-lg text-base-800 font-medium">
                       Admin
                     </p>
                     <p className="text-2xl md:text-md text-purple-500 font-medium">
@@ -119,13 +119,13 @@ const AdminCard = ({
             </a>
 
             <a href={adminRoutes.manageUsers}>
-              <div className="backdrop-blur-xl bg-white/10 md:w-64 w-80 hover:bg-white/20 h-24 rounded-lg shadow-md flex items-center justify-center">
+              <div className=" hover:border hover:border-red-500 md:w-64 w-80  h-24 rounded-lg bg-base-300 flex items-center justify-center">
                 <div className="flex px-2 flex-row w-full items-center justify-center gap-3">
                   <div className=" bg-red-100 rounded-full p-2">
                     <FaRegUser className="text-5xl h-12 w-12 flex pr-0  p-1  md:text-6xl text-gray-700" />
                   </div>
                   <div className="flex w-52 flex-col">
-                    <p className="text-lg md:text-lg text-gray-200 font-medium">
+                    <p className="text-lg md:text-lg text-base-800 font-medium">
                       Users
                     </p>
                     <p className="text-2xl md:text-md text-red-500 font-medium">

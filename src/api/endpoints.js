@@ -17,9 +17,11 @@ const admin = {
   allCards: "/admin/all-cards",
 };
 const users = {
-  getUser: `/user/get/${decodedUserID}`,
+  userDetail: `/user/get/${decodedUserID}`,
   deleteUser: `/user/delete/${decodedUserID}`,
   updateUser: `/user/update/${decodedUserID}`, //upload.single("profileImage"),
+
+  getUser: (userId) => `/user/get/${userId}`,
 };
 
 const classEndpoints = {

@@ -256,7 +256,7 @@ const ManageUsers = () => {
                 </div>
 
                 <div className="mt-2">
-                  <table className="w-full table-auto">
+                  <table className="w-full bg-gray-600 rounded-lg overflow-hidden table-auto">
                     <thead>
                       <tr className=" bg-gray-600 text-gray-200 uppercase text-sm leading-normal">
                         <th className="py-3 px-3 text-left">User Profile</th>
@@ -297,13 +297,21 @@ const ManageUsers = () => {
                         currentUsers.map((user, index) => (
                           <tr
                             key={index}
-                            className="border-b border-gray-500 hover:bg-gray-600"
+                            className="
+                            bg-gray-600
+                            hover:bg-gray-700
+                            text-gray-300
+                            border-b border-gray-700
+                            hover:border-gray-800
+                            transition-colors
+                            duration-200
+                            "
                           >
                             <td className="py-1 px-3 max-w-15 text-left whitespace-nowrap">
                               <div className="flex items-center">
                                 <img
                                   alt="user"
-                                  className="h-14 w-14 rounded-full"
+                                  className="h-12 w-12 rounded-full"
                                   src={user.profile}
                                 />
                               </div>

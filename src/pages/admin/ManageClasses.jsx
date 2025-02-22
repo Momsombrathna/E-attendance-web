@@ -113,7 +113,7 @@ const ManageClasses = () => {
 
   return (
     <>
-      <main className=" px-3  mb-20">
+      <main className=" px-3 mb-20">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="py-2">
             <div className="my-2">
@@ -224,9 +224,19 @@ const ManageClasses = () => {
                 </div>
 
                 <div className="mt-2">
-                  <table className="w-full table-auto">
-                    <thead>
-                      <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                  <table
+                    className="
+                    w-full
+                    bg-gray-600
+                    rounded-lg
+                    
+                    table-auto
+                    whitespace-nowrap
+                    text-left
+                  "
+                  >
+                    <thead className="bg-gray-600 text-gray-300 uppercase text-sm leading-normal">
+                      <tr className="bg-gray-600 text-gray-300 uppercase text-sm leading-normal">
                         <th className="py-3 px-3 text-left">Class Profile</th>
                         <th className="py-3 px-3 text-left">Class Name</th>
                         <th className="py-3 px-3 text-left">Owner</th>
@@ -239,7 +249,10 @@ const ManageClasses = () => {
                         <th className="py-3 px-3 text-center">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="text-gray-200 text-sm font-light">
+                    <tbody
+                      className="text-gray-200
+                     text-sm font-light"
+                    >
                       {loading ? (
                         <tr>
                           <td colSpan="5" className="text-center py-4">
@@ -268,13 +281,21 @@ const ManageClasses = () => {
                         currentClasses.map((data, index) => (
                           <tr
                             key={index}
-                            className="border-b border-gray-500 hover:bg-gray-600"
+                            className="
+                            bg-gray-600
+                            hover:bg-gray-700
+                            text-gray-300
+                            border-b border-gray-700
+                            hover:border-gray-800
+                            transition-colors
+                            duration-200
+                             "
                           >
                             <td className="py-1 px-3 text-left whitespace-nowrap">
                               <div className="flex items-center">
                                 <img
                                   alt="user"
-                                  className="h-14 w-14 rounded-full"
+                                  className="h-12 w-12 rounded-full"
                                   src={data.classProfile}
                                 />
                               </div>

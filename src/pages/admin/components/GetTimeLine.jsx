@@ -122,48 +122,48 @@ const GetTimeLine = ({ classId }) => {
         </div>
       ) : (
         <div className="flex flex-col gap-4">
-          <div className="flex  flex-col gap-2">
-            <table className="min-w-full text-center divide-y divide-gray-500">
-              <thead className="bg-gray-200 border border-1  w-full">
+          <div className="flex rounded-lg flex-col gap-2">
+            <table className="min-w-full text-center rounded-lg divide-y divide-gray-600">
+              <thead className="bg-gray-600 border border-1  w-full">
                 <tr>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-800 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
                     Description
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-800 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
                     From
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-800 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
                     To
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-800 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
                     Checked In
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-800 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
                     Check Out
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-800 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
                     Location
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-800 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-200 uppercase tracking-wider">
                     See more
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-gray-400 rounded-xl divide-y divide-gray-500">
+              <tbody className="bg-gray-600 rounded-xl divide-y divide-gray-500">
                 {attendances.attendance.map((data, index) => (
                   <tr key={index}>
                     <td className="px-6 py-4 border whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
+                      <div className="text-sm text-gray-200">
                         {data.description}
                       </div>
                     </td>
                     <td className="px-6 py-4 border whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
+                      <div className="text-sm text-gray-200">
                         {formateDate(data.from)}
                       </div>
                     </td>
                     <td className="px-6 py-4 border whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
+                      <div className="text-sm text-gray-200">
                         {formateDate(data.to)}
                       </div>
                     </td>
@@ -268,16 +268,16 @@ const GetTimeLine = ({ classId }) => {
                               }}
                             >
                               <tr>
-                                <th className="text-left pl-3 text-xs font-medium text-gray-800  tracking-wider">
+                                <th className="text-left pl-3 text-xs font-medium text-gray-200  tracking-wider">
                                   Student
                                 </th>
-                                <th className="text-center text-xs font-medium text-gray-800  tracking-wider">
+                                <th className="text-center text-xs font-medium text-gray-200  tracking-wider">
                                   Checked In
                                 </th>
-                                <th className="text-center text-xs font-medium text-gray-800  tracking-wider">
+                                <th className="text-center text-xs font-medium text-gray-200  tracking-wider">
                                   Checked Out
                                 </th>
-                                <th className="text-center text-xs font-medium text-gray-800  tracking-wider">
+                                <th className="text-center text-xs font-medium text-gray-200  tracking-wider">
                                   Status
                                 </th>
                               </tr>
