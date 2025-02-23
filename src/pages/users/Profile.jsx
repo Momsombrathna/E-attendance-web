@@ -6,6 +6,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { FaPenToSquare } from "react-icons/fa6";
 import { api_url, decodedToken } from "../../api/config";
 import axios from "axios";
+import { HiOutlinePencilSquare } from "react-icons/hi2";
 
 const fetcher = (url) => QueryRequest(apiPoints.users.userDetail, "GET");
 
@@ -19,7 +20,7 @@ const Profile = () => {
   useEffect(() => {
     if (data) {
       setProfileName(data.username);
-      setProfileImage(data.profile);
+      setProfileImage(`${data.profile}?timestamp=${new Date().getTime()}`);
     }
   }, [data]);
 
@@ -144,8 +145,8 @@ const Profile = () => {
       </section>
       <div className="w-full h-full flex flex-col md:flex-row mt-5 gap-5">
         <div className="md:w-1/3 w-full">
-          <div className="w-full h-96 bg-base-300 rounded-lg p-5 flex items-center justify-center">
-            <div className="flex flex-col items-center">
+          <div className="w-full h-96 bg-base-300 relative rounded-lg p-5 flex-col flex items-center justify-center">
+            <div className="flex flex-col items-center ">
               <img
                 src={`${data.profile}?timestamp=${new Date().getTime()}`}
                 className="w-60 h-60 rounded-full"
@@ -160,6 +161,12 @@ const Profile = () => {
                 )}
               </p>
             </div>
+            <button
+              onClick={() => document.getElementById("my_modal_3").showModal()}
+              className="flex btn absolute right-1 bottom-1 text-base-800 items-center bg-primary-500  px-5 rounded-lg hover:bg-primary-600 transition duration-300"
+            >
+              <HiOutlinePencilSquare size={"1.2rem"} />
+            </button>
           </div>
         </div>
         <div className="md:w-2/3 w-full">
@@ -167,9 +174,9 @@ const Profile = () => {
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-2xl font-medium">User details</h2>
               <button
-                onClick={() =>
-                  document.getElementById("my_modal_3").showModal()
-                }
+                // onClick={() =>
+                //   document.getElementById("my_modal_3").showModal()
+                // }
                 className="flex btn text-base-800 items-center gap-2 bg-primary-500  px-5 py-2 rounded-lg hover:bg-primary-600 transition duration-300"
               >
                 <FaPenToSquare />

@@ -26,7 +26,7 @@ const users = {
 
 const classEndpoints = {
   studentClass: `/class/get-students-class/${decodedUserID}`,
-  classOwner: `/class/get-class-owner/${decodedUserID}`,
+  classOwner: `/user/get-class-owner/${decodedUserID}`,
   studentCard: `/class/get-student-card/${decodedUserID}`,
   addClass: `/class/create-class/${decodedUserID}`,
   addStudentByCode: "/class/invite-by-code",

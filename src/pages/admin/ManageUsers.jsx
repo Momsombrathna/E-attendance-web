@@ -256,7 +256,7 @@ const ManageUsers = () => {
                 </div>
 
                 <div className="mt-2">
-                  <table className="w-full bg-gray-600 rounded-lg overflow-hidden table-auto">
+                  <table className="w-full bg-gray-600 rounded-lg table-auto">
                     <thead>
                       <tr className=" bg-gray-600 text-gray-200 uppercase text-sm leading-normal">
                         <th className="py-3 px-3 text-left">User Profile</th>
@@ -312,7 +312,9 @@ const ManageUsers = () => {
                                 <img
                                   alt="user"
                                   className="h-12 w-12 rounded-full"
-                                  src={user.profile}
+                                  src={`${
+                                    user.profile
+                                  }?timestamp=${new Date().getTime()}`}
                                 />
                               </div>
                             </td>

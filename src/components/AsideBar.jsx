@@ -31,8 +31,6 @@ const AsideBar = () => {
 
   const [isOpen, setIsOpen] = useState(true);
 
-  console.log(data);
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
@@ -178,7 +176,7 @@ const AsideBar = () => {
                           </span>
                         </Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link
                           to="/attendance"
                           className="flex items-center p-2 pl-6 text-base-400 hover:bg-base-200 group"
@@ -188,7 +186,7 @@ const AsideBar = () => {
                             Join Class
                           </span>
                         </Link>
-                      </li>
+                      </li> */}
                     </>
                   )}
                   <h3 className="ms-3 font-medium mb-4 mt-2 text-eee-500">

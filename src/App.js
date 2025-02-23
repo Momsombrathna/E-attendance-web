@@ -20,6 +20,7 @@ import Home from "./pages/Home";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageClasses from "./pages/admin/ManageClasses";
 import ClassDetail from "./pages/admin/ClassDetail";
+import ClassOwnerDetail from "./pages/users/ClassOwnerDetail";
 import GetUser from "./pages/admin/components/GetUser";
 import { Analytics } from "@vercel/analytics/react";
 import { isAdmin, isUser, isLogged, isNotLogged } from "./context/AuthContext";
@@ -125,6 +126,12 @@ function App() {
                 )
               }
             />
+            <Route
+              path="/get-user"
+              element={
+                isLogged() && isAdmin() ? <GetUser /> : <Navigate to="/login" />
+              }
+            />
             {/* User Router */}
             <Route
               path="/user-home"
@@ -142,10 +149,15 @@ function App() {
                 )
               }
             />
+
             <Route
-              path="/get-user"
+              path="/class-owner-detail/:classId"
               element={
-                isLogged() && isAdmin() ? <GetUser /> : <Navigate to="/login" />
+                isLogged() && isUser() ? (
+                  <ClassOwnerDetail />
+                ) : (
+                  <Navigate to="/login" />
+                )
               }
             />
           </Route>
