@@ -162,9 +162,9 @@ const ManageUsers = () => {
                   </li>
                 </ul>
               </div>
-              <div className=" backdrop-blur-lg bg-white/10 rounded-lg p-2 md:p-4">
+              <div className=" bg-base-300 rounded-lg p-2 md:p-4">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-medium text-gray-400">
+                  <h3 className="text-2xl font-medium text-base-400">
                     Users Management
                   </h3>
                   <form
@@ -256,10 +256,10 @@ const ManageUsers = () => {
                 </div>
 
                 <div className="mt-2">
-                  <table className="w-full bg-gray-600 rounded-lg table-auto">
+                  <table className="w-full bg-base-600 rounded-lg table-auto">
                     <thead>
-                      <tr className=" bg-gray-600 text-gray-200 uppercase text-sm leading-normal">
-                        <th className="py-3 px-3 text-left">User Profile</th>
+                      <tr className=" bg-base-600 text-base-600 uppercase text-sm leading-normal">
+                        <th className="py-3 px-3 text-left">Profile</th>
                         <th className="py-3 px-3 text-left">User Name</th>
                         <th className="py-3 px-3 text-left">Email</th>
                         <th className="py-3 px-3 text-center">Role</th>
@@ -268,7 +268,7 @@ const ManageUsers = () => {
                         <th className="py-3 px-3 text-center">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="text-gray-200 text-sm font-light">
+                    <tbody className="text-base-600 text-sm font-light">
                       {loading ? (
                         <tr>
                           <td colspan="7" className="text-center py-4">
@@ -295,18 +295,7 @@ const ManageUsers = () => {
                         </tr>
                       ) : (
                         currentUsers.map((user, index) => (
-                          <tr
-                            key={index}
-                            className="
-                            bg-gray-600
-                            hover:bg-gray-700
-                            text-gray-300
-                            border-b border-gray-700
-                            hover:border-gray-800
-                            transition-colors
-                            duration-200
-                            "
-                          >
+                          <tr key={index}>
                             <td className="py-1 px-3 max-w-15 text-left whitespace-nowrap">
                               <div className="flex items-center">
                                 <img
@@ -318,16 +307,16 @@ const ManageUsers = () => {
                                 />
                               </div>
                             </td>
-                            <td className="py-1 px-3 max-w-5 text-left whitespace-nowrap">
-                              <div className="flex items-center">
-                                <span className="font-medium">
+                            <td className="py-1 px-3 max-w-18 text-left">
+                              <div className="flex items-center font-medium">
+                                <span className="truncate">
                                   {user.username}
                                 </span>
                               </div>
                             </td>
                             <td className="py-1 px-3 max-w-18  text-left">
                               <div className="flex items-center font-medium">
-                                <span>{user.email}</span>
+                                <span className="truncate">{user.email}</span>
                               </div>
                             </td>
                             <td className="py-1 max-w-10  px-3 text-center">

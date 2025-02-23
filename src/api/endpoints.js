@@ -46,6 +46,7 @@ const card = {
 };
 
 const attendance = {
+  getTimeline: (classId) => `/attendance/get-subclass/${classId}`,
   createTimeline: (classId) => `/attendance/create-timeline/${classId}`,
   updateTimeline: (attendanceId) => `/attendance/edit-timeline/${attendanceId}`,
   deleteTimeline: (attendanceId) =>

@@ -131,9 +131,9 @@ const ManageClasses = () => {
                   </li>
                 </ul>
               </div>
-              <div className="backdrop-blur-lg bg-white/10 rounded-lg p-2 md:p-4">
+              <div className="bg-base-300 rounded-lg p-2 md:p-4">
                 <div className="flex md:flex-row flex-col items-center">
-                  <h3 className="text-xl md:mb-0 mb-4 font-medium text-gray-400 ">
+                  <h3 className="text-xl md:mb-0 mb-4 font-bold text-base-600 ">
                     Classes Management
                   </h3>
 
@@ -225,18 +225,15 @@ const ManageClasses = () => {
 
                 <div className="mt-2">
                   <table
-                    className="
-                    w-full
-                    bg-gray-600
+                    className=" w-full
                     rounded-lg
-                    
                     table-auto
                     whitespace-nowrap
                     text-left
                   "
                   >
-                    <thead className="bg-gray-600 text-gray-300 uppercase text-sm leading-normal">
-                      <tr className="bg-gray-600 text-gray-300 uppercase text-sm leading-normal">
+                    <thead className=" uppercase text-sm leading-normal">
+                      <tr className="text-base-600 uppercase text-sm leading-normal">
                         <th className="py-3 px-3 text-left">Class Profile</th>
                         <th className="py-3 px-3 text-left">Class Name</th>
                         <th className="py-3 px-3 text-left">Owner</th>
@@ -249,10 +246,7 @@ const ManageClasses = () => {
                         <th className="py-3 px-3 text-center">Actions</th>
                       </tr>
                     </thead>
-                    <tbody
-                      className="text-gray-200
-                     text-sm font-light"
-                    >
+                    <tbody className="text-base-600 text-sm">
                       {loading ? (
                         <tr>
                           <td colSpan="5" className="text-center py-4">
@@ -279,18 +273,7 @@ const ManageClasses = () => {
                         </tr>
                       ) : (
                         currentClasses.map((data, index) => (
-                          <tr
-                            key={index}
-                            className="
-                            bg-gray-600
-                            hover:bg-gray-700
-                            text-gray-300
-                            border-b border-gray-700
-                            hover:border-gray-800
-                            transition-colors
-                            duration-200
-                             "
-                          >
+                          <tr key={index}>
                             <td className="py-1 px-3 text-left whitespace-nowrap">
                               <div className="flex items-center">
                                 <img
@@ -313,7 +296,7 @@ const ManageClasses = () => {
                               </div>
                             </td>
                             <td className="py-1 px-3 text-center desktop-only">
-                              <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs font-medium">
+                              <span className="bg-base-200 text-base-600 py-1 px-3 rounded-full text-xs font-medium">
                                 {data.students.length}
                               </span>
                             </td>
@@ -329,9 +312,12 @@ const ManageClasses = () => {
                                 <div
                                   tabIndex={0}
                                   role="button"
-                                  className=" bg-gray-600 rounded-full p-2"
+                                  className="rounded-full p-2 bg-base-200"
                                 >
-                                  <HiDotsHorizontal size={"1rem"} />
+                                  <HiDotsHorizontal
+                                    size={"1rem"}
+                                    className="text-base-600"
+                                  />
                                 </div>
 
                                 <ul

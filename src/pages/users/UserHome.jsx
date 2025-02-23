@@ -19,7 +19,9 @@ import CryptoJs from "crypto-js";
 import QRCode from "react-qr-code";
 import { GrUserAdmin } from "react-icons/gr";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { MdOutlineEdit } from "react-icons/md";
+import { RiDeleteBin2Line } from "react-icons/ri";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 const fetcher = (url) =>
   QueryRequest(apiPoints.classEndpoints.classOwner, "GET");
@@ -170,17 +172,48 @@ const UserHome = () => {
                 />
                 <div className="flex flex-col">
                   <div className="flex flex-row gap-2 items-center content-center">
-                    <h2 className="text-xl font-bold">{data.className}</h2>
-                    <p className="text-xl font-bold">
-                      {" "}
-                      &#91; {data.code} &#93;{" "}
-                    </p>
+                    <h2 className="text-md font-medium truncate">
+                      {data.className}
+                    </h2>
                   </div>
-                  <p>Owner: {data.ownerName}</p>
+                  <p className="text-sm font-medium">
+                    {" "}
+                    code: &#91; {data.code} &#93;{" "}
+                  </p>
 
-                  <p>Created: {new Date(data.created).toLocaleDateString()}</p>
+                  <p className="text-xs font-medium">
+                    Created: {new Date(data.created).toLocaleDateString()}
+                  </p>
                 </div>
                 <div className="ml-auto flex flex-row content-center gap-2  items-center">
+                  <div
+                    onClick={() =>
+                      document.getElementById("edit_model").showModal()
+                    }
+                    tabIndex={0}
+                    title="Members"
+                    role="button"
+                    className="
+                        md:flex hidden
+                        btn btn-sm
+                        btn-ghost
+                        rounded-btn
+                        bg-base-200
+                        dropdown-toggle"
+                  >
+                    <MdOutlineEdit size={"1.5rem"} />
+                  </div>
+
+                  <dialog id="edit_model" className="modal">
+                    <div className="modal-box">
+                      <form method="dialog">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                    </div>
+                  </dialog>
+
                   <div
                     onClick={() =>
                       document.getElementById("my_modal_2").showModal()
@@ -223,24 +256,19 @@ const UserHome = () => {
                       </div>
                     </div>
                   </dialog>
-                  <div
-                    onClick={() =>
-                      document.getElementById("my_modal_3").showModal()
-                    }
-                    tabIndex={0}
-                    title="Members"
-                    role="button"
-                    className="
-                        md:flex hidden
-                        btn btn-sm
-                        btn-ghost
-                        rounded-btn
-                        bg-base-200
-                        dropdown-toggle
-                      "
+
+                  <Link
+                    to={`/class-owner-detail/${encodeURIComponent(
+                      CryptoJs.AES.encrypt(
+                        JSON.stringify(data._id),
+                        "secret-key-123"
+                      ).toString()
+                    )}`}
                   >
-                    <LuUsers size={"1.5rem"} />
-                  </div>
+                    <button className="btn btn-sm btn-ghost rounded-btn bg-base-200">
+                      <MdOutlineRemoveRedEye size={"1.5rem"} />
+                    </button>
+                  </Link>
                   <dialog id="my_modal_3" className="modal">
                     <div className="modal-box">
                       <form method="dialog">
@@ -296,34 +324,56 @@ const UserHome = () => {
 
                       <ul
                         tabIndex={0}
-                        className="dropdown-content flex justify-center mt-2 items-center z-[1] backdrop-blur-sm bg-base-100  rounded-box w-24 md:h-20 h-40"
+                        className="dropdown-content flex justify-center mt-2 items-center z-[1] backdrop-blur-sm bg-base-100  rounded-box w-16 md:h-20 h-40"
                       >
-                        <div className="flex flex-col w-20 gap-2">
-                          <div>
-                            <button
-                              onClick={() =>
-                                handleDeleteClass(data._id, data.owner)
-                              }
-                              className="bg-red-500 w-20 text-white py-1 px-3 rounded-md text-xs font-medium"
-                            >
-                              Delete
+                        <div className="flex  flex-col py-3 items-center content-center w-20 gap-2">
+                          {/* <Link
+                            to={`/class-owner-detail/${encodeURIComponent(
+                              CryptoJs.AES.encrypt(
+                                JSON.stringify(data._id),
+                                "secret-key-123"
+                              ).toString()
+                            )}`}
+                          >
+                            <button className="btn btn-sm btn-ghost rounded-btn bg-base-200">
+                              <MdOutlineRemoveRedEye size={"1.5rem"} />
                             </button>
+                          </Link> */}
+                          <div
+                            onClick={() =>
+                              document.getElementById("my_modal_3").showModal()
+                            }
+                            tabIndex={0}
+                            title="Members"
+                            role="button"
+                            className="
+                                    md:flex hidden
+                                    btn btn-sm
+                                    btn-ghost
+                                    rounded-btn
+                                    bg-base-200
+                                    dropdown-toggle
+                                  "
+                          >
+                            <LuUsers size={"1.5rem"} />
                           </div>
-                          <div>
-                            <Link
-                              to={`/class-owner-detail/${encodeURIComponent(
-                                CryptoJs.AES.encrypt(
-                                  JSON.stringify(data._id),
-                                  "secret-key-123"
-                                ).toString()
-                              )}`}
-                            >
-                              <button className="bg-blue-500 w-20 text-white py-1 px-3 rounded-md text-xs font-medium">
-                                View
-                              </button>
-                            </Link>
+                          <div
+                            onClick={() =>
+                              document.getElementById("edit_model").showModal()
+                            }
+                            tabIndex={0}
+                            title="Members"
+                            role="button"
+                            className="
+                                md:hidden flex
+                                btn btn-sm
+                                btn-ghost
+                                rounded-btn
+                                bg-base-200
+                                dropdown-toggle"
+                          >
+                            <MdOutlineEdit size={"1.5rem"} />
                           </div>
-
                           <div
                             onClick={() =>
                               document.getElementById("my_modal_3").showModal()
@@ -349,16 +399,21 @@ const UserHome = () => {
                             tabIndex={0}
                             title="Members"
                             role="button"
-                            className="
-                                      md:hidden flex
-                                      btn btn-sm
-                                      btn-ghost
-                                      rounded-btn
-                                      bg-base-200
-                                      dropdown-toggle"
+                            className=" md:hidden flex btn btn-sm btn-ghost rounded-btn bg-base-200 dropdown-toggle"
                           >
                             <FaQrcode size={"1.5rem"} />
                           </div>
+                          <button
+                            onClick={() =>
+                              handleDeleteClass(data._id, data.owner)
+                            }
+                            className="btn btn-sm btn-ghost rounded-btn bg-red-400"
+                          >
+                            <RiDeleteBin2Line
+                              size={"1.5rem"}
+                              className="text-base-200"
+                            />
+                          </button>
                         </div>
                       </ul>
                     </div>
