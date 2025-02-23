@@ -16,26 +16,22 @@ import { RiAdminLine } from "react-icons/ri";
 import { PiGraduationCapLight } from "react-icons/pi";
 import { BiChevronsLeft } from "react-icons/bi";
 import { BiChevronsRight } from "react-icons/bi";
+import { QueryRequest } from "../api/apiService";
+import apiPoints from "../api/endpoints";
+import useSWR from "swr";
+
 import { adminRoutes, userRoutes } from "../routes/routesPoint";
 
 import Logo from "../assets/e-attendance.png";
-import Cookies from "js-cookie";
+
+const fetcher = (url) => QueryRequest(apiPoints.users.userDetail, "GET");
 
 const AsideBar = () => {
+  const { data, error } = useSWR(apiPoints.users.userDetail, fetcher);
+
   const [isOpen, setIsOpen] = useState(true);
-  const [username, setUsername] = useState("");
-  const [userProfile, setUserProfile] = useState("");
-  const [userEmail, setUserEmail] = useState("");
 
-  useEffect(() => {
-    const name = Cookies.get("username");
-    const profile = Cookies.get("profile");
-    const email = Cookies.get("email");
-
-    setUsername(name);
-    setUserProfile(profile);
-    setUserEmail(email);
-  }, []);
+  console.log(data);
 
   useEffect(() => {
     const handleResize = () => {
@@ -277,7 +273,17 @@ const AsideBar = () => {
                     className="btn btn-ghost btn-circle avatar"
                   >
                     <div className="w-10 rounded-full">
-                      <img alt="User Profile" src={userProfile} />
+                      {!data ? (
+                        <div className="w-10 h-10 rounded-full bg-base-300 animate-pulse"></div>
+                      ) : (
+                        <img
+                          src={`${
+                            data.profile
+                          }?timestamp=${new Date().getTime()}`}
+                          alt="avatar"
+                          className="w-10 h-10 rounded-full"
+                        />
+                      )}
                     </div>
                   </div>
                   <ul
@@ -289,7 +295,11 @@ const AsideBar = () => {
                         href="/profile"
                         className="justify-between bg-base-300"
                       >
-                        {userEmail}
+                        {!data ? (
+                          <div className="w-10 h-10 rounded-full bg-base-300 animate-pulse"></div>
+                        ) : (
+                          <p>{data.email}</p>
+                        )}
                       </a>
                     </li>
                     <li>
