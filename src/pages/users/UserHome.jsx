@@ -22,6 +22,7 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
 
 const fetcher = (url) =>
   QueryRequest(apiPoints.classEndpoints.classOwner, "GET");
@@ -86,21 +87,21 @@ const UserHome = () => {
 
   return (
     <>
-      <main className="overflow-y-auto bg overflow-hidden h-screen px-2 p-2">
+      <main className=" overflow-hidden h-screen px-2 p-2">
         <section className="flex mt-6 w-full">
           <div className="w-full h-14 bg-base-300 flex flex-row content-center items-center rounded-lg p-5">
             <div className="breadcrumbs md:flex hidden text-sm">
               <ul>
                 <li>
-                  <a href="/">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="/users">User</a>
+                  <Link to="#">Users</Link>
                 </li>
                 <li>User Profile</li>
               </ul>
             </div>
-            <div className="ml-auto md:w-2/3 w-full h-8 flex gap-3 items-center">
+            <div className="ml-auto md:w-1/2 w-full h-8 flex gap-3 items-center">
               {/* search bar */}
               <div className="relative w-full">
                 <input
@@ -111,14 +112,14 @@ const UserHome = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <button className="absolute top-0 right-0 rounded-l-none btn bg-base-800 text-base-content">
-                  Search
+                  <IoSearch size={"1.5rem"} />
                 </button>
               </div>
               <button
                 onClick={() => document.getElementById("my_modal").showModal()}
                 className="btn text-base-content ml-auto"
               >
-                Create
+                <span className="md:flex hidden">Create</span>
                 <IoAddCircleOutline
                   size={"2rem"}
                   className="text-base-content"
@@ -162,172 +163,175 @@ const UserHome = () => {
           </div>
         </section>
         <section className="flex mt-3 w-full flex-col">
-          {results.map((data) => (
-            <div key={data._id} className="bg-base-300 p-2 rounded-lg mb-4">
-              <div className="flex items-center">
-                <img
-                  src={`${data.classProfile}?timestamp=${new Date().getTime()}`}
-                  alt={`${data.className} Profile`}
-                  className="w-16 h-16 rounded-full mr-4"
-                />
-                <div className="flex flex-col">
-                  <div className="flex flex-row gap-2 items-center content-center">
-                    <h2 className="text-md font-medium truncate">
-                      {data.className}
-                    </h2>
-                  </div>
-                  <p className="text-sm font-medium">
-                    {" "}
-                    code: &#91; {data.code} &#93;{" "}
-                  </p>
-
-                  <p className="text-xs font-medium">
-                    Created: {new Date(data.created).toLocaleDateString()}
-                  </p>
-                </div>
-                <div className="ml-auto flex flex-row content-center gap-2  items-center">
-                  <div
-                    onClick={() =>
-                      document.getElementById("edit_model").showModal()
-                    }
-                    tabIndex={0}
-                    title="Members"
-                    role="button"
-                    className="
-                        md:flex hidden
-                        btn btn-sm
-                        btn-ghost
-                        rounded-btn
-                        bg-base-200
-                        dropdown-toggle"
-                  >
-                    <MdOutlineEdit size={"1.5rem"} />
-                  </div>
-
-                  <dialog id="edit_model" className="modal">
-                    <div className="modal-box">
-                      <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                          ✕
-                        </button>
-                      </form>
+          <div className="overflow-x-auto w-full">
+            {results.map((data) => (
+              <div key={data._id} className="bg-base-300 p-2 rounded-lg mb-4">
+                <div className="flex items-center">
+                  <img
+                    src={`${
+                      data.classProfile
+                    }?timestamp=${new Date().getTime()}`}
+                    alt={`${data.className} Profile`}
+                    className="w-16 h-16 rounded-full mr-4"
+                  />
+                  <div className="flex flex-col">
+                    <div className="flex flex-row gap-2 items-center content-center">
+                      <h2 className="text-md font-medium truncate">
+                        {data.className}
+                      </h2>
                     </div>
-                  </dialog>
+                    <p className="text-sm font-medium">
+                      {" "}
+                      code: &#91; {data.code} &#93;{" "}
+                    </p>
 
-                  <div
-                    onClick={() =>
-                      document.getElementById("my_modal_2").showModal()
-                    }
-                    tabIndex={0}
-                    title="Members"
-                    role="button"
-                    className="
+                    <p className="text-xs font-medium">
+                      Created: {new Date(data.created).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div className="ml-auto flex flex-row content-center gap-2  items-center">
+                    <div
+                      onClick={() =>
+                        document.getElementById("edit_model").showModal()
+                      }
+                      tabIndex={0}
+                      title="Members"
+                      role="button"
+                      className="
                         md:flex hidden
                         btn btn-sm
                         btn-ghost
                         rounded-btn
                         bg-base-200
                         dropdown-toggle"
-                  >
-                    <IoIosAddCircleOutline size={"1.5rem"} />
-                  </div>
+                    >
+                      <MdOutlineEdit size={"1.5rem"} />
+                    </div>
 
-                  <dialog id="my_modal_2" className="modal">
-                    <div className="modal-box">
-                      <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                          ✕
-                        </button>
-                      </form>
-                      <div className="flex flex-row items-center content-center gap-2">
-                        <h3 className="font-bold text-base-800 text-lg">
-                          Class QR code
-                        </h3>
+                    <dialog id="edit_model" className="modal">
+                      <div className="modal-box">
+                        <form method="dialog">
+                          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                            ✕
+                          </button>
+                        </form>
                       </div>
-                      <div className="flex flex-col w-full items-center content-center py-2 gap-2">
-                        <div className="flex flex-row items-center gap-2">
-                          <button className="btn btn-sm btn-circle btn-ghost bg-base-200">
-                            <LuDownload size={"1.5rem"} />
+                    </dialog>
+
+                    <div
+                      onClick={() =>
+                        document.getElementById("my_modal_2").showModal()
+                      }
+                      tabIndex={0}
+                      title="Members"
+                      role="button"
+                      className="
+                        md:flex hidden
+                        btn btn-sm
+                        btn-ghost
+                        rounded-btn
+                        bg-base-200
+                        dropdown-toggle"
+                    >
+                      <IoIosAddCircleOutline size={"1.5rem"} />
+                    </div>
+
+                    <dialog id="my_modal_2" className="modal">
+                      <div className="modal-box">
+                        <form method="dialog">
+                          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                            ✕
                           </button>
-                          <button className="btn btn-sm btn-circle btn-ghost bg-base-200">
-                            <IoMdShare size={"1.5rem"} />
-                          </button>
+                        </form>
+                        <div className="flex flex-row items-center content-center gap-2">
+                          <h3 className="font-bold text-base-800 text-lg">
+                            Class QR code
+                          </h3>
+                        </div>
+                        <div className="flex flex-col w-full items-center content-center py-2 gap-2">
+                          <div className="flex flex-row items-center gap-2">
+                            <button className="btn btn-sm btn-circle btn-ghost bg-base-200">
+                              <LuDownload size={"1.5rem"} />
+                            </button>
+                            <button className="btn btn-sm btn-circle btn-ghost bg-base-200">
+                              <IoMdShare size={"1.5rem"} />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </dialog>
+                    </dialog>
 
-                  <Link
-                    to={`/class-owner-detail/${encodeURIComponent(
-                      CryptoJs.AES.encrypt(
-                        JSON.stringify(data._id),
-                        "secret-key-123"
-                      ).toString()
-                    )}`}
-                  >
-                    <button className="btn btn-sm btn-ghost rounded-btn bg-base-200">
-                      <MdOutlineRemoveRedEye size={"1.5rem"} />
-                    </button>
-                  </Link>
-                  <dialog id="my_modal_3" className="modal">
-                    <div className="modal-box">
-                      <form method="dialog">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                          ✕
-                        </button>
-                      </form>
-                      <h3 className="font-bold text-base-800 text-lg">
-                        Members
-                      </h3>
-                      <div className="flex flex-col py-2 gap-2">
-                        {data.students.map((student) => (
-                          <div
-                            key={student.studentName}
-                            className="flex flex-row items-center gap-2"
-                          >
-                            <img
-                              src={`${
-                                student.studentProfile
-                              }?timestamp=${new Date().getTime()}`}
-                              alt={`${student.studentName} Profile`}
-                              className="w-10 h-10 rounded-full"
-                            />
+                    <Link
+                      to={`/class-owner-detail/${encodeURIComponent(
+                        CryptoJs.AES.encrypt(
+                          JSON.stringify(data._id),
+                          "secret-key-123"
+                        ).toString()
+                      )}`}
+                    >
+                      <button className="btn btn-sm btn-ghost rounded-btn bg-base-200">
+                        <MdOutlineRemoveRedEye size={"1.5rem"} />
+                      </button>
+                    </Link>
+                    <dialog id="my_modal_3" className="modal">
+                      <div className="modal-box">
+                        <form method="dialog">
+                          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                            ✕
+                          </button>
+                        </form>
+                        <h3 className="font-bold text-base-800 text-lg">
+                          Members
+                        </h3>
+                        <div className="flex flex-col py-2 gap-2">
+                          {data.students.map((student) => (
+                            <div
+                              key={student.studentName}
+                              className="flex flex-row items-center gap-2"
+                            >
+                              <img
+                                src={`${
+                                  student.studentProfile
+                                }?timestamp=${new Date().getTime()}`}
+                                alt={`${student.studentName} Profile`}
+                                className="w-10 h-10 rounded-full"
+                              />
 
-                            <div className=" flex flex-row items-center gap-2">
-                              <p>{student.studentName}</p>
-                              {student.studentId === data.owner ? (
-                                <span title="Class Owner">✅</span>
-                              ) : (
-                                ""
-                              )}
+                              <div className=" flex flex-row items-center gap-2">
+                                <p>{student.studentName}</p>
+                                {student.studentId === data.owner ? (
+                                  <span title="Class Owner">✅</span>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </dialog>
-                  <td className="px-3 text-center">
-                    <div className="dropdown dropdown-end">
-                      <div
-                        tabIndex={0}
-                        role="button"
-                        className="
+                    </dialog>
+                    <td className="px-3 text-center">
+                      <div className="dropdown dropdown-end">
+                        <div
+                          tabIndex={0}
+                          role="button"
+                          className="
                         btn btn-sm
                         btn-ghost
                         rounded-btn
                         bg-base-200
                         dropdown-toggle
                       "
-                      >
-                        <HiDotsHorizontal size={"1rem"} />
-                      </div>
+                        >
+                          <HiDotsHorizontal size={"1rem"} />
+                        </div>
 
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content flex justify-center mt-2 items-center z-[1] backdrop-blur-sm bg-base-100  rounded-box w-16 md:h-20 h-40"
-                      >
-                        <div className="flex  flex-col py-3 items-center content-center w-20 gap-2">
-                          {/* <Link
+                        <ul
+                          tabIndex={0}
+                          className="dropdown-content flex justify-center mt-2 items-center z-[1] backdrop-blur-sm bg-base-100  rounded-box w-16 md:h-20 h-40"
+                        >
+                          <div className="flex  flex-col py-3 items-center content-center w-20 gap-2">
+                            {/* <Link
                             to={`/class-owner-detail/${encodeURIComponent(
                               CryptoJs.AES.encrypt(
                                 JSON.stringify(data._id),
@@ -339,14 +343,16 @@ const UserHome = () => {
                               <MdOutlineRemoveRedEye size={"1.5rem"} />
                             </button>
                           </Link> */}
-                          <div
-                            onClick={() =>
-                              document.getElementById("my_modal_3").showModal()
-                            }
-                            tabIndex={0}
-                            title="Members"
-                            role="button"
-                            className="
+                            <div
+                              onClick={() =>
+                                document
+                                  .getElementById("my_modal_3")
+                                  .showModal()
+                              }
+                              tabIndex={0}
+                              title="Members"
+                              role="button"
+                              className="
                                     md:flex hidden
                                     btn btn-sm
                                     btn-ghost
@@ -354,34 +360,38 @@ const UserHome = () => {
                                     bg-base-200
                                     dropdown-toggle
                                   "
-                          >
-                            <LuUsers size={"1.5rem"} />
-                          </div>
-                          <div
-                            onClick={() =>
-                              document.getElementById("edit_model").showModal()
-                            }
-                            tabIndex={0}
-                            title="Members"
-                            role="button"
-                            className="
+                            >
+                              <LuUsers size={"1.5rem"} />
+                            </div>
+                            <div
+                              onClick={() =>
+                                document
+                                  .getElementById("edit_model")
+                                  .showModal()
+                              }
+                              tabIndex={0}
+                              title="Members"
+                              role="button"
+                              className="
                                 md:hidden flex
                                 btn btn-sm
                                 btn-ghost
                                 rounded-btn
                                 bg-base-200
                                 dropdown-toggle"
-                          >
-                            <MdOutlineEdit size={"1.5rem"} />
-                          </div>
-                          <div
-                            onClick={() =>
-                              document.getElementById("my_modal_3").showModal()
-                            }
-                            tabIndex={0}
-                            title="Members"
-                            role="button"
-                            className="
+                            >
+                              <MdOutlineEdit size={"1.5rem"} />
+                            </div>
+                            <div
+                              onClick={() =>
+                                document
+                                  .getElementById("my_modal_3")
+                                  .showModal()
+                              }
+                              tabIndex={0}
+                              title="Members"
+                              role="button"
+                              className="
                                      md:hidden flex
                                       btn btn-sm
                                       btn-ghost
@@ -389,39 +399,42 @@ const UserHome = () => {
                                       bg-base-200
                                       dropdown-toggle
                                     "
-                          >
-                            <LuUsers size={"1.5rem"} />
+                            >
+                              <LuUsers size={"1.5rem"} />
+                            </div>
+                            <div
+                              onClick={() =>
+                                document
+                                  .getElementById("my_modal_2")
+                                  .showModal()
+                              }
+                              tabIndex={0}
+                              title="Members"
+                              role="button"
+                              className=" md:hidden flex btn btn-sm btn-ghost rounded-btn bg-base-200 dropdown-toggle"
+                            >
+                              <FaQrcode size={"1.5rem"} />
+                            </div>
+                            <button
+                              onClick={() =>
+                                handleDeleteClass(data._id, data.owner)
+                              }
+                              className="btn btn-sm btn-ghost rounded-btn bg-red-400"
+                            >
+                              <RiDeleteBin2Line
+                                size={"1.5rem"}
+                                className="text-base-200"
+                              />
+                            </button>
                           </div>
-                          <div
-                            onClick={() =>
-                              document.getElementById("my_modal_2").showModal()
-                            }
-                            tabIndex={0}
-                            title="Members"
-                            role="button"
-                            className=" md:hidden flex btn btn-sm btn-ghost rounded-btn bg-base-200 dropdown-toggle"
-                          >
-                            <FaQrcode size={"1.5rem"} />
-                          </div>
-                          <button
-                            onClick={() =>
-                              handleDeleteClass(data._id, data.owner)
-                            }
-                            className="btn btn-sm btn-ghost rounded-btn bg-red-400"
-                          >
-                            <RiDeleteBin2Line
-                              size={"1.5rem"}
-                              className="text-base-200"
-                            />
-                          </button>
-                        </div>
-                      </ul>
-                    </div>
-                  </td>
+                        </ul>
+                      </div>
+                    </td>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </section>
       </main>
     </>

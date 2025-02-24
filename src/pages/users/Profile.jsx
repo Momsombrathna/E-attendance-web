@@ -7,6 +7,7 @@ import { FaPenToSquare } from "react-icons/fa6";
 import { api_url, decodedToken } from "../../api/config";
 import axios from "axios";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
+import Cropper from "react-easy-crop";
 
 const fetcher = (url) => QueryRequest(apiPoints.users.userDetail, "GET");
 

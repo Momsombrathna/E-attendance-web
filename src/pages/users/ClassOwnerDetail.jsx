@@ -10,7 +10,11 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { MdOutlineEdit, MdOutlineRemoveRedEye } from "react-icons/md";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { HiDotsHorizontal } from "react-icons/hi";
+import { IoSearch } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { RiDeleteBin2Line } from "react-icons/ri";
+import { GoPeople } from "react-icons/go";
+import { TbMapPin2 } from "react-icons/tb";
 
 const ClassOwnerDetail = () => {
   const { classId } = useParams();
@@ -60,21 +64,22 @@ const ClassOwnerDetail = () => {
 
   return (
     <>
-      <main className="overflow-y-auto bg overflow-hidden h-screen px-2 p-2">
+      <main className=" bg overflow-hidden h-screen px-2 p-2">
         <section className="flex mt-6 w-full">
           <div className="w-full h-14 bg-base-300 flex flex-row content-center items-center rounded-lg p-5">
             <div className="breadcrumbs md:flex hidden text-sm">
               <ul>
                 <li>
-                  <a href="/">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="/users">User</a>
+                  <Link to="#">Class</Link>
                 </li>
+
                 <li>User Profile</li>
               </ul>
             </div>
-            <div className="ml-auto md:w-2/3 w-full h-8 flex gap-3 items-center">
+            <div className="ml-auto md:w-1/2 w-full h-8 flex gap-3 items-center">
               {/* search bar */}
               <div className="relative w-full">
                 <input
@@ -85,14 +90,14 @@ const ClassOwnerDetail = () => {
                   onChange={(e) => setSearch(e.target.value)}
                 />
                 <button className="absolute top-0 right-0 rounded-l-none btn bg-base-800 text-base-content">
-                  Search
+                  <IoSearch size={"1.5rem"} />
                 </button>
               </div>
               <button
                 onClick={() => document.getElementById("my_modal").showModal()}
                 className="btn text-base-content ml-auto"
               >
-                Create
+                <span className="md:flex hidden">Create</span>
                 <IoAddCircleOutline
                   size={"2rem"}
                   className="text-base-content"
@@ -138,21 +143,12 @@ const ClassOwnerDetail = () => {
           </div>
         </section>
         <section className="flex mt-3 w-full flex-col">
-          <div className="overflow-x-auto w-full">
+          <div className="overflow-x-auto w-full mb-6">
             <table
               className="
               table w-full table-compact table-zebra table-striped table-hover
             "
             >
-              <thead>
-                <tr>
-                  <th className="text-left">Description</th>
-                  <th className="text-left">Start from</th>
-                  <th className="text-left">End at</th>
-                  <th className="text-left">Range</th>
-                  <th className="text-left">Actions</th>
-                </tr>
-              </thead>
               <tbody>
                 {!classData.length ? (
                   <tr>
@@ -162,9 +158,11 @@ const ClassOwnerDetail = () => {
                   </tr>
                 ) : (
                   classData.map((classData) => (
-                    <tr key={classData._id}>
-                      <td className="truncate">{classData.description}</td>
-                      <td>
+                    <tr className=" rounded-lg bg-base-300" key={classData._id}>
+                      <td className="truncate md:text-sm text-xs">
+                        {classData.description}
+                      </td>
+                      <td className="md:text-sm text-xs">
                         {new Date(classData.from).toLocaleString("en-GB", {
                           day: "2-digit",
                           month: "2-digit",
@@ -174,7 +172,7 @@ const ClassOwnerDetail = () => {
                           hour12: true,
                         })}
                       </td>
-                      <td>
+                      <td className="md:text-sm text-xs">
                         {new Date(classData.to).toLocaleString("en-GB", {
                           day: "2-digit",
                           month: "2-digit",
@@ -184,19 +182,51 @@ const ClassOwnerDetail = () => {
                           hour12: true,
                         })}
                       </td>
-                      <td>{convertRange(classData.location_range)}</td>
+
                       <td className="flex flex-row gap-2">
-                        <button className="btn btn-sm btn-ghost">
-                          <MdOutlineEdit size={"1.5rem"} />
-                        </button>
+                        <span
+                          title="Location range"
+                          className="btn btn-sm bg-base-100 hover:base-400 btn-ghost md:flex hidden"
+                        >
+                          {convertRange(classData.location_range)}
+                        </span>
+                        {/* View */}
                         <button
+                          title="View attendance"
                           onClick={() => {
                             document.getElementById("my_modal_4").showModal();
                           }}
-                          className="btn btn-sm btn-ghost rounded-btn bg-base-200"
+                          className="btn btn-sm btn-ghost bg-base-100 hover:bg-base-400 rounded-btn md:flex hidden"
                         >
-                          <MdOutlineRemoveRedEye size={"1.5rem"} />
+                          <GoPeople size={"1.5rem"} />
                         </button>
+                        {/* Map */}
+                        <button
+                          title="View map"
+                          onClick={() => {
+                            document.getElementById("model_map").showModal();
+                          }}
+                          className="btn btn-sm btn-ghost bg-base-100 hover:bg-base-400 rounded-btn md:flex hidden"
+                        >
+                          <TbMapPin2 size={"1.5rem"} />
+                        </button>
+                        {/* Map */}
+                        <dialog id="model_map" className="modal">
+                          <div className="modal-box">
+                            <form method="dialog">
+                              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                ✕
+                              </button>
+                            </form>
+                            <h3 className="font-bold text-base-800 text-lg">
+                              Map
+                            </h3>
+                            <div className="overflow-x-auto w-full flex flex-col items-center content-center">
+                              <div className="w-full h-96 bg-base-300 rounded-lg"></div>
+                            </div>
+                          </div>
+                        </dialog>
+                        {/* View attendance */}
                         <dialog id="my_modal_4" className="modal">
                           <div className="modal-box">
                             <form method="dialog">
@@ -207,23 +237,14 @@ const ClassOwnerDetail = () => {
                             <h3 className="font-bold text-base-800 text-lg">
                               Attendance
                             </h3>
-                            <div className="overflow-x-auto w-full flex flex-col items-center content-center">
-                              <thead>
-                                <tr>
-                                  <th className="text-left">Profile</th>
-                                  <th className="text-left">Name</th>
-                                  <th className="text-left">Checked In</th>
-                                  <th className="text-left">Checked Out</th>
-                                  <th className="text-left">Status</th>
-                                </tr>
-                              </thead>
-                              <tbody>
+                            <div className="overflow-x-auto w-full flex flex-col p-2 items-center content-center">
+                              <tbody className="w-full bg-base-300 rounded-lg">
                                 {!classData.attendances.length ? (
                                   <p>No attendance data found</p>
                                 ) : (
                                   classData.attendances.map((attendance) => (
                                     <tr key={attendance._id}>
-                                      <td>
+                                      <td className="w-20">
                                         <img
                                           src={attendance.studentProfile}
                                           className="w-8 h-8 rounded-full"
@@ -232,7 +253,7 @@ const ClassOwnerDetail = () => {
                                       </td>
 
                                       <td>{attendance.studentName}</td>
-                                      <td>
+                                      <td className="md:text-sm text-xs">
                                         {new Date(
                                           attendance.checkedIn
                                         ).toLocaleString("en-GB", {
@@ -241,7 +262,7 @@ const ClassOwnerDetail = () => {
                                           hour12: true,
                                         })}
                                       </td>
-                                      <td>
+                                      <td className="md:text-sm text-xs">
                                         {new Date(
                                           attendance.checkedOut
                                         ).toLocaleString("en-GB", {
@@ -253,11 +274,11 @@ const ClassOwnerDetail = () => {
                                       <td>
                                         {attendance.status === "absent" ? (
                                           <span className="text-red-500">
-                                            Absent
+                                            ❌
                                           </span>
                                         ) : (
                                           <span className="text-green-500">
-                                            Present
+                                            ✅
                                           </span>
                                         )}
                                       </td>
@@ -268,9 +289,64 @@ const ClassOwnerDetail = () => {
                             </div>
                           </div>
                         </dialog>
-                        <button className="btn btn-sm btn-ghost">
-                          <HiDotsHorizontal size={"1.5rem"} />
-                        </button>
+                      </td>
+                      <td className="px-3 text-center">
+                        <div className="dropdown dropdown-end">
+                          <div
+                            tabIndex={0}
+                            role="button"
+                            className="btn btn-sm btn-ghost bg-base-100 hover:bg-base-400 rounded-btn dropdown-toggle "
+                          >
+                            <HiDotsHorizontal size={"1rem"} />
+                          </div>
+
+                          <ul
+                            tabIndex={0}
+                            className="dropdown-content flex justify-center mt-2 items-center z-[1] backdrop-blur-sm bg-base-100  rounded-box w-16 md:h-20 h-40"
+                          >
+                            <div className="flex flex-col items-center content-center gap-1">
+                              {/* edit */}
+
+                              <button
+                                title="View attendance"
+                                onClick={() => {
+                                  document
+                                    .getElementById("my_modal_4")
+                                    .showModal();
+                                }}
+                                className="btn btn-sm btn-ghost bg-base-200 hover:bg-base-400  rounded-btn md:hidden flex"
+                              >
+                                <GoPeople size={"1.5rem"} />
+                              </button>
+                              {/* Map */}
+                              <button
+                                title="View map"
+                                onClick={() => {
+                                  document
+                                    .getElementById("model_map")
+                                    .showModal();
+                                }}
+                                className="btn btn-sm btn-ghost bg-base-200 hover:bg-base-400  rounded-btn md:hidden flex"
+                              >
+                                <TbMapPin2 size={"1.5rem"} />
+                              </button>
+                              <button className="btn btn-sm bg-base-200 hover:bg-base-400 btn-ghost">
+                                <MdOutlineEdit size={"1.5rem"} />
+                              </button>
+                              <button
+                                // onClick={() =>
+                                //   handleDeleteClass(data._id, data.owner)
+                                // }
+                                className="btn btn-sm btn-ghost rounded-btn bg-red-400"
+                              >
+                                <RiDeleteBin2Line
+                                  size={"1.5rem"}
+                                  className="text-base-200"
+                                />
+                              </button>
+                            </div>
+                          </ul>
+                        </div>
                       </td>
                     </tr>
                   ))
