@@ -225,7 +225,7 @@ const GetTimeLine = ({ classId }) => {
                             <Map
                               lat={data.latitude}
                               lon={data.longitude}
-                              zoom={15}
+                              zoom={5}
                             />
                           </div>
                         </dialog>

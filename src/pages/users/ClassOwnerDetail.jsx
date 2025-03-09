@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { GoPeople } from "react-icons/go";
 import { TbMapPin2 } from "react-icons/tb";
+import MapPicker from "../../hooks/MapPicker";
 
 const ClassOwnerDetail = () => {
   const { classId } = useParams();
@@ -222,7 +223,14 @@ const ClassOwnerDetail = () => {
                               Map
                             </h3>
                             <div className="overflow-x-auto w-full flex flex-col items-center content-center">
-                              <div className="w-full h-96 bg-base-300 rounded-lg"></div>
+                              <div className="w-full h-full bg-base-300 rounded-lg">
+                                <MapPicker
+                                  lat={classData.latitude}
+                                  lon={classData.longitude}
+                                  zoom={18}
+                                  radius={classData.location_range}
+                                />
+                              </div>
                             </div>
                           </div>
                         </dialog>
